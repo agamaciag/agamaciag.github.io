@@ -7,6 +7,9 @@
     <meta name="keywords" content="ARTIn, fundacja, kultura, sztuka, polska, muzyka, edukacja">
     <title>ARTIn - Fundacja Kultury i Sztuki</title>
     
+    <!-- Favicon - simple data URI to avoid 404 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -18,6 +21,7 @@
     <style>
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            cursor: default;
         }
         
         @keyframes fade-in {
@@ -35,7 +39,18 @@
             animation: fade-in 0.6s ease-out;
         }
         
-        /* Normal cursor - removed custom cursor */
+        /* Force normal cursors everywhere */
+        * {
+            cursor: inherit !important;
+        }
+        
+        button, a, [onclick] {
+            cursor: pointer !important;
+        }
+        
+        input, textarea {
+            cursor: text !important;
+        }
         
         /* Smooth scrolling */
         html {
@@ -136,8 +151,8 @@
                 <div class="max-w-7xl mx-auto">
                     <div class="grid lg:grid-cols-12 gap-12">
                         <div class="lg:col-span-7">
-                            <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-none mb-8">
-                                Wspieranie<br/>i propagowanie<br/>polskiej kultury
+                            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8">
+                                Wspieranie i propagowanie<br/>polskiej kultury
                             </h2>
                         </div>
                         <div class="lg:col-span-5 flex items-end">
@@ -154,11 +169,10 @@
             <!-- Featured Image 1 -->
             <section class="border-b border-black">
                 <img 
-                    src="images/piano-hands.jpg" 
+                    src="/images/piano-hands.jpg" 
                     alt="Dłonie pianisty na klawiaturze fortepianu Yamaha"
                     class="w-full h-auto object-cover"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: piano-hands.jpg</p></div>'"
+                    onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: piano-hands.jpg<br/>Sprawdź folder images/</p></div>'"
                 />
             </section>
 
@@ -187,11 +201,10 @@
                 </div>
                 <div class="aspect-[4/3] lg:aspect-auto">
                     <img 
-                        src="images/concert-hall.jpg" 
+                        src="/images/concert-hall.jpg" 
                         alt="Pianista wykonujący koncert w sali koncertowej"
                         class="w-full h-full object-cover"
-                        loading="lazy"
-                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: concert-hall.jpg</p></div>'"
+                        onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: concert-hall.jpg</p></div>'"
                     />
                 </div>
             </section>
@@ -245,11 +258,10 @@
             <!-- Full Width Image 3 -->
             <section class="border-b border-black">
                 <img 
-                    src="images/musicians-group.jpg" 
+                    src="/images/musicians-group.jpg" 
                     alt="Zespół muzyków podczas występu"
                     class="w-full h-auto object-cover"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: musicians-group.jpg</p></div>'"
+                    onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: musicians-group.jpg</p></div>'"
                 />
             </section>
         </div>
@@ -265,11 +277,10 @@
                     <!-- Featured Event Image -->
                     <div class="mb-16 border border-black overflow-hidden">
                         <img 
-                            src="images/music-education.jpg" 
+                            src="/images/music-education.jpg" 
                             alt="Sesja edukacyjna muzyczna"
                             class="w-full h-auto object-cover"
-                            loading="lazy"
-                            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: music-education.jpg</p></div>'"
+                            onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: music-education.jpg</p></div>'"
                         />
                     </div>
 
