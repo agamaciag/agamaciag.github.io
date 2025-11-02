@@ -7,7 +7,7 @@
     <meta name="keywords" content="ARTIn, fundacja, kultura, sztuka, polska, muzyka, edukacja">
     <title>ARTIn - Fundacja Kultury i Sztuki</title>
     
-    <!-- Favicon - simple data URI to avoid 404 -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
     
     <!-- Tailwind CSS -->
@@ -19,69 +19,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     
     <style>
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            cursor: default;
-        }
+        * { cursor: auto !important; }
+        body { font-family: 'Inter', sans-serif; cursor: default !important; }
+        button, a, [onclick], .cursor-pointer { cursor: pointer !important; }
+        input, textarea, select { cursor: text !important; }
         
         @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .animate-fade-in {
-            animation: fade-in 0.6s ease-out;
-        }
-        
-        /* Force normal cursors everywhere */
-        * {
-            cursor: inherit !important;
-        }
-        
-        button, a, [onclick] {
-            cursor: pointer !important;
-        }
-        
-        input, textarea {
-            cursor: text !important;
-        }
-        
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        /* Image loading optimization */
-        img {
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
-        
-        /* Hover effects */
-        .hover-invert:hover {
-            background-color: black;
-            color: white;
-        }
-        
-        /* Mobile menu animation */
-        #mobile-menu {
-            transition: all 0.3s ease;
-        }
-        
-        /* Tab button active state */
-        .tab-btn.active {
-            font-weight: 700;
-        }
-        
-        .tab-btn:not(.active) {
-            font-weight: 300;
-        }
+        .animate-fade-in { animation: fade-in 0.6s ease-out; }
+        html { scroll-behavior: smooth; }
+        .hover-invert:hover { background-color: black; color: white; }
+        #mobile-menu { transition: all 0.3s ease; }
+        .tab-btn.active { font-weight: 700; }
+        .tab-btn:not(.active) { font-weight: 300; }
+        .lang-btn { transition: opacity 0.3s ease; }
+        .lang-btn:hover { opacity: 0.6; }
+        .lang-btn.active { border-bottom: 2px solid black; }
     </style>
 </head>
 <body class="bg-white text-black antialiased">
@@ -89,30 +44,35 @@
     <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-40 border-b border-black">
         <div class="max-w-full px-6 lg:px-12 py-6">
             <div class="flex justify-between items-start">
-                <!-- Logo -->
                 <div class="flex flex-col">
                     <h1 class="text-5xl lg:text-7xl font-bold tracking-tight leading-none">ARTIn</h1>
                     <span class="text-xs tracking-widest mt-1 opacity-60">FUNDACJA / FOUNDATION</span>
                 </div>
 
-                <!-- Desktop Navigation -->
                 <div class="hidden lg:flex flex-col items-end space-y-2">
+                    <div class="flex gap-3 mb-2 text-sm">
+                        <button onclick="changeLanguage('pl')" id="lang-pl" class="lang-btn active cursor-pointer">PL</button>
+                        <span class="opacity-30">|</span>
+                        <button onclick="changeLanguage('en')" id="lang-en" class="lang-btn cursor-pointer">EN</button>
+                        <span class="opacity-30">|</span>
+                        <button onclick="changeLanguage('de')" id="lang-de" class="lang-btn cursor-pointer">DE</button>
+                    </div>
+                    
                     <button onclick="showTab('onas')" id="tab-onas" class="tab-btn active text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">01</span>
-                        <span class="text-2xl ml-4">O nas</span>
+                        <span class="text-2xl ml-4" id="nav-about">O nas</span>
                     </button>
                     <button onclick="showTab('wydarzenia')" id="tab-wydarzenia" class="tab-btn text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">02</span>
-                        <span class="text-2xl ml-4">Wydarzenia</span>
+                        <span class="text-2xl ml-4" id="nav-events">Wydarzenia</span>
                     </button>
                     <button onclick="showTab('wspieraj')" id="tab-wspieraj" class="tab-btn text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">03</span>
-                        <span class="text-2xl ml-4">Wspieraj nas</span>
+                        <span class="text-2xl ml-4" id="nav-support">Wspieraj nas</span>
                     </button>
                 </div>
 
-                <!-- Mobile menu button -->
-                <button onclick="toggleMobile()" class="lg:hidden p-2 cursor-pointer" id="mobile-btn" aria-label="Menu">
+                <button onclick="toggleMobile()" class="lg:hidden p-2 cursor-pointer">
                     <svg id="menu-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -126,181 +86,152 @@
             </div>
         </div>
 
-        <!-- Mobile Navigation -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-black">
             <div class="px-6 py-8 space-y-4">
-                <button onclick="showTab('onas'); toggleMobile()" class="block w-full text-left text-2xl font-bold cursor-pointer">
+                <div class="flex gap-4 mb-4 text-sm pb-4 border-b border-gray-200">
+                    <button onclick="changeLanguage('pl')" class="lang-btn active cursor-pointer">PL</button>
+                    <span class="opacity-30">|</span>
+                    <button onclick="changeLanguage('en')" class="lang-btn cursor-pointer">EN</button>
+                    <span class="opacity-30">|</span>
+                    <button onclick="changeLanguage('de')" class="lang-btn cursor-pointer">DE</button>
+                </div>
+                
+                <button onclick="showTab('onas'); toggleMobile()" id="mobile-nav-about" class="block w-full text-left text-2xl font-bold cursor-pointer">
                     <span class="text-xs opacity-60">01</span> O nas
                 </button>
-                <button onclick="showTab('wydarzenia'); toggleMobile()" class="block w-full text-left text-2xl font-light cursor-pointer">
+                <button onclick="showTab('wydarzenia'); toggleMobile()" id="mobile-nav-events" class="block w-full text-left text-2xl font-light cursor-pointer">
                     <span class="text-xs opacity-60">02</span> Wydarzenia
                 </button>
-                <button onclick="showTab('wspieraj'); toggleMobile()" class="block w-full text-left text-2xl font-light cursor-pointer">
+                <button onclick="showTab('wspieraj'); toggleMobile()" id="mobile-nav-support" class="block w-full text-left text-2xl font-light cursor-pointer">
                     <span class="text-xs opacity-60">03</span> Wspieraj nas
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="pt-32 lg:pt-40">
-        <!-- O nas Section -->
+        <!-- O nas -->
         <div id="onas-content" class="tab-content">
-            <!-- Hero -->
             <section class="px-6 lg:px-12 py-20 border-b border-black">
-                <div class="max-w-7xl mx-auto">
-                    <div class="grid lg:grid-cols-12 gap-12">
-                        <div class="lg:col-span-7">
-                            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8">
-                                Wspieranie i propagowanie<br/>polskiej kultury
-                            </h2>
-                        </div>
-                        <div class="lg:col-span-5 flex items-end">
-                            <p class="text-xl leading-relaxed font-light">
-                                Misją Fundacji ARTIn jest wspieranie i propagowanie polskiej kultury 
-                                w kraju i poza jego granicami, a także rozwój edukacji kulturalnej 
-                                i artystycznej, służącej budowaniu otwartego i twórczego społeczeństwa.
-                            </p>
-                        </div>
+                <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-12">
+                    <div class="lg:col-span-7">
+                        <h2 id="hero-title" class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-8">
+                            Wspieranie i propagowanie<br/>polskiej kultury
+                        </h2>
+                    </div>
+                    <div class="lg:col-span-5 flex items-end">
+                        <p id="hero-mission" class="text-xl leading-relaxed font-light">
+                            Misją Fundacji ARTIn jest wspieranie i propagowanie polskiej kultury w kraju i poza jego granicami, a także rozwój edukacji kulturalnej i artystycznej, służącej budowaniu otwartego i twórczego społeczeństwa.
+                        </p>
                     </div>
                 </div>
             </section>
 
-            <!-- Featured Image 1 -->
             <section class="border-b border-black">
-                <img 
-                    src="/images/piano-hands.jpg" 
-                    alt="Dłonie pianisty na klawiaturze fortepianu Yamaha"
-                    class="w-full h-auto object-cover"
-                    onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: piano-hands.jpg<br/>Sprawdź folder images/</p></div>'"
-                />
+                <img src="/images/piano-hands.jpg" alt="Piano hands" class="w-full h-auto object-cover" />
             </section>
 
-            <!-- Mission Statement -->
             <section class="px-6 lg:px-12 py-20 border-b border-black bg-black text-white">
                 <div class="max-w-7xl mx-auto">
-                    <p class="text-3xl lg:text-5xl font-light leading-relaxed">
-                        Cele Fundacji koncentrują się na wspieraniu, promowaniu i rozwoju 
-                        polskiej kultury oraz sztuki — zarówno w kraju, jak i za granicą.
+                    <p id="mission-statement" class="text-3xl lg:text-5xl font-light leading-relaxed">
+                        Cele Fundacji koncentrują się na wspieraniu, promowaniu i rozwoju polskiej kultury oraz sztuki — zarówno w kraju, jak i za granicą.
                     </p>
                 </div>
             </section>
 
-            <!-- Split Section with Image -->
             <section class="grid lg:grid-cols-2 border-b border-black">
                 <div class="p-12 lg:p-16 flex items-center border-r border-black">
                     <div>
-                        <h3 class="text-4xl lg:text-6xl font-bold mb-8 leading-tight">
+                        <h3 id="split-title" class="text-4xl lg:text-6xl font-bold mb-8 leading-tight">
                             Muzyka łączy<br/>pokolenia
                         </h3>
-                        <p class="text-lg font-light leading-relaxed">
-                            Organizujemy koncerty i wydarzenia muzyczne, które są mostem 
-                            między tradycją a współczesnością, między Polską a światem.
+                        <p id="split-text" class="text-lg font-light leading-relaxed">
+                            Organizujemy koncerty i wydarzenia muzyczne, które są mostem między tradycją a współczesnością, między Polską a światem.
                         </p>
                     </div>
                 </div>
                 <div class="aspect-[4/3] lg:aspect-auto">
-                    <img 
-                        src="/images/concert-hall.jpg" 
-                        alt="Pianista wykonujący koncert w sali koncertowej"
-                        class="w-full h-full object-cover"
-                        onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: concert-hall.jpg</p></div>'"
-                    />
+                    <img src="/images/concert-hall.jpg" alt="Concert hall" class="w-full h-full object-cover" />
                 </div>
             </section>
 
-            <!-- Activities Grid -->
             <section class="grid lg:grid-cols-3">
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">01</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Koncertowa</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-0" class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Koncertowa</h3>
+                    <p id="activity-desc-0" class="text-sm leading-relaxed font-light">
                         Fundacja prowadzi działalność koncertową, organizując wydarzenia muzyczne promujące polskich kompozytorów i wykonawców.
                     </p>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">02</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Wystawiennicza</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-1" class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Wystawiennicza</h3>
+                    <p id="activity-desc-1" class="text-sm leading-relaxed font-light">
                         Organizujemy wystawy i prezentacje dzieł sztuki, tworząc przestrzenie dialogu między artystami a publicznością.
                     </p>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">03</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Edukacyjna</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-2" class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Edukacyjna</h3>
+                    <p id="activity-desc-2" class="text-sm leading-relaxed font-light">
                         Prowadzimy programy edukacyjne i warsztaty, rozwijając wrażliwość kulturalną i artystyczną uczestników.
                     </p>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">04</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Wsparcie<br/>Twórców</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-3" class="text-3xl font-bold mb-6 leading-tight">Wsparcie<br/>Twórców</h3>
+                    <p id="activity-desc-3" class="text-sm leading-relaxed font-light">
                         Wspieramy twórców i artystów, inicjując przedsięwzięcia kulturalne i edukacyjne na rzecz rozwoju polskiej sceny artystycznej.
                     </p>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">05</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Dialog<br/>Międzykulturowy</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-4" class="text-3xl font-bold mb-6 leading-tight">Dialog<br/>Międzykulturowy</h3>
+                    <p id="activity-desc-4" class="text-sm leading-relaxed font-light">
                         Rozwijamy dialog międzykulturowy i integrację, budując więzi społeczne poprzez sztukę i kulturę.
                     </p>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">06</span>
-                    <h3 class="text-3xl font-bold mb-6 leading-tight">Dziedzictwo<br/>Kulturowe</h3>
-                    <p class="text-sm leading-relaxed font-light">
+                    <h3 id="activity-title-5" class="text-3xl font-bold mb-6 leading-tight">Dziedzictwo<br/>Kulturowe</h3>
+                    <p id="activity-desc-5" class="text-sm leading-relaxed font-light">
                         Dbamy o zachowanie i popularyzację polskiego dziedzictwa kulturowego oraz promocję Polski na arenie międzynarodowej.
                     </p>
                 </div>
             </section>
 
-            <!-- Full Width Image 3 -->
             <section class="border-b border-black">
-                <img 
-                    src="/images/musicians-group.jpg" 
-                    alt="Zespół muzyków podczas występu"
-                    class="w-full h-auto object-cover"
-                    onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: musicians-group.jpg</p></div>'"
-                />
+                <img src="/images/musicians-group.jpg" alt="Musicians" class="w-full h-auto object-cover" />
             </section>
         </div>
 
-        <!-- Wydarzenia Section -->
+        <!-- Wydarzenia -->
         <div id="wydarzenia-content" class="tab-content hidden">
             <div class="px-6 lg:px-12 py-20">
                 <div class="max-w-7xl mx-auto">
-                    <h2 class="text-6xl lg:text-8xl font-bold mb-20">
+                    <h2 id="events-title" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-20">
                         Nadchodzące<br/>Wydarzenia
                     </h2>
                     
-                    <!-- Featured Event Image -->
                     <div class="mb-16 border border-black overflow-hidden">
-                        <img 
-                            src="/images/music-education.jpg" 
-                            alt="Sesja edukacyjna muzyczna"
-                            class="w-full h-auto object-cover"
-                            onerror="console.error('Image failed to load:', this.src); this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500 text-sm\'>Nie można załadować: music-education.jpg</p></div>'"
-                        />
+                        <img src="/images/music-education.jpg" alt="Music education" class="w-full h-auto object-cover" />
                     </div>
 
-                    <!-- Events List -->
                     <div class="space-y-0">
                         <div class="border-t border-black py-8 hover-invert transition-all duration-300 cursor-pointer" onclick="toggleEvent(0)">
                             <div class="flex justify-between items-start gap-8">
                                 <div class="flex-1">
                                     <div class="flex items-baseline gap-4 mb-2">
                                         <span class="text-xs tracking-widest opacity-60">01</span>
-                                        <span class="text-sm font-light">15.11.2025</span>
+                                        <span id="event-date-0" class="text-sm font-light">15.11.2025</span>
                                     </div>
-                                    <h3 class="text-4xl lg:text-6xl font-bold mb-4">Koncert Kameralny</h3>
-                                    <p class="text-lg font-light mb-2">Warszawa, Filharmonia Narodowa</p>
-                                    <div id="event-0" class="hidden mt-6 max-w-3xl">
-                                        <p class="text-xl leading-relaxed font-light mb-4">
-                                            Wieczór muzyki polskich kompozytorów. Odkrywamy na nowo klasykę i współczesność 
-                                            polskiej sceny muzycznej w intymnej atmosferze sali kameralnej.
+                                    <h3 id="event-title-0" class="text-4xl lg:text-6xl font-bold mb-4">Koncert Kameralny</h3>
+                                    <p id="event-location-0" class="text-lg font-light mb-2">Warszawa, Filharmonia Narodowa</p>
+                                    <div id="event-0" class="hidden mt-6 max-w-3xl pl-8">
+                                        <p id="event-desc-0" class="text-xl leading-relaxed font-light mb-4">
+                                            Wieczór muzyki polskich kompozytorów. Odkrywamy na nowo klasykę i współczesność polskiej sceny muzycznej w intymnej atmosferze sali kameralnej.
                                         </p>
-                                        <p class="text-sm tracking-widest opacity-60">GODZINA: 19:00</p>
+                                        <p id="event-time-0" class="text-sm tracking-widest opacity-60">GODZINA: 19:00</p>
                                     </div>
                                 </div>
                                 <button class="text-4xl mt-2">+</button>
@@ -312,16 +243,15 @@
                                 <div class="flex-1">
                                     <div class="flex items-baseline gap-4 mb-2">
                                         <span class="text-xs tracking-widest opacity-60">02</span>
-                                        <span class="text-sm font-light">01-30.12.2025</span>
+                                        <span id="event-date-1" class="text-sm font-light">01-30.12.2025</span>
                                     </div>
-                                    <h3 class="text-4xl lg:text-6xl font-bold mb-4">Wystawa "Polskie Głosy"</h3>
-                                    <p class="text-lg font-light mb-2">Berlin, Galeria Współczesna</p>
-                                    <div id="event-1" class="hidden mt-6 max-w-3xl">
-                                        <p class="text-xl leading-relaxed font-light mb-4">
-                                            Prezentacja prac współczesnych polskich artystów. Dialog między tradycją a nowoczesnością, 
-                                            między Polską a Niemcami, między przeszłością a przyszłością.
+                                    <h3 id="event-title-1" class="text-4xl lg:text-6xl font-bold mb-4">Wystawa "Polskie Głosy"</h3>
+                                    <p id="event-location-1" class="text-lg font-light mb-2">Berlin, Galeria Współczesna</p>
+                                    <div id="event-1" class="hidden mt-6 max-w-3xl pl-8">
+                                        <p id="event-desc-1" class="text-xl leading-relaxed font-light mb-4">
+                                            Prezentacja prac współczesnych polskich artystów. Dialog między tradycją a nowoczesnością, między Polską a Niemcami, między przeszłością a przyszłością.
                                         </p>
-                                        <p class="text-sm tracking-widest opacity-60">GODZINA: 10:00-18:00</p>
+                                        <p id="event-time-1" class="text-sm tracking-widest opacity-60">GODZINA: 10:00-18:00</p>
                                     </div>
                                 </div>
                                 <button class="text-4xl mt-2">+</button>
@@ -333,16 +263,15 @@
                                 <div class="flex-1">
                                     <div class="flex items-baseline gap-4 mb-2">
                                         <span class="text-xs tracking-widest opacity-60">03</span>
-                                        <span class="text-sm font-light">10.01.2026</span>
+                                        <span id="event-date-2" class="text-sm font-light">10.01.2026</span>
                                     </div>
-                                    <h3 class="text-4xl lg:text-6xl font-bold mb-4">Warsztaty Edukacyjne</h3>
-                                    <p class="text-lg font-light mb-2">Kraków, Centrum Kultury</p>
-                                    <div id="event-2" class="hidden mt-6 max-w-3xl">
-                                        <p class="text-xl leading-relaxed font-light mb-4">
-                                            Interdyscyplinarne warsztaty dla młodzieży. Eksperymentujemy z formą, łączymy media, 
-                                            tworzymy nowe narracje.
+                                    <h3 id="event-title-2" class="text-4xl lg:text-6xl font-bold mb-4">Warsztaty Edukacyjne</h3>
+                                    <p id="event-location-2" class="text-lg font-light mb-2">Kraków, Centrum Kultury</p>
+                                    <div id="event-2" class="hidden mt-6 max-w-3xl pl-8">
+                                        <p id="event-desc-2" class="text-xl leading-relaxed font-light mb-4">
+                                            Interdyscyplinarne warsztaty dla młodzieży. Eksperymentujemy z formą, łączymy media, tworzymy nowe narracje.
                                         </p>
-                                        <p class="text-sm tracking-widest opacity-60">GODZINA: 14:00-18:00</p>
+                                        <p id="event-time-2" class="text-sm tracking-widest opacity-60">GODZINA: 14:00-18:00</p>
                                     </div>
                                 </div>
                                 <button class="text-4xl mt-2">+</button>
@@ -353,90 +282,69 @@
             </div>
         </div>
 
-        <!-- Wspieraj Section -->
+        <!-- Wspieraj -->
         <div id="wspieraj-content" class="tab-content hidden">
-            <!-- Hero -->
             <section class="px-6 lg:px-12 py-20 border-b border-black">
                 <div class="max-w-7xl mx-auto">
-                    <h2 class="text-6xl lg:text-9xl font-bold leading-none mb-12">
+                    <h2 id="support-title" class="text-6xl lg:text-9xl font-bold leading-none mb-12">
                         Wspieraj<br/>Kulturę
                     </h2>
-                    <p class="text-2xl lg:text-3xl font-light max-w-4xl">
+                    <p id="support-subtitle" class="text-2xl lg:text-3xl font-light max-w-4xl">
                         Twoje wsparcie pozwala nam realizować misję promowania polskiej kultury i sztuki w kraju i za granicą
                     </p>
                 </div>
             </section>
 
-            <!-- Support Options -->
             <section class="grid lg:grid-cols-3">
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">01</span>
-                    <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Jednorazowa<br/>Darowizna</h3>
-                    <p class="text-sm leading-relaxed font-light mb-8">
+                    <h3 id="support-title-0" class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Jednorazowa<br/>Darowizna</h3>
+                    <p id="support-desc-0" class="text-sm leading-relaxed font-light mb-8">
                         Wesprzyj konkretny projekt lub wydarzenie. Każda kwota ma znaczenie i pomaga nam realizować naszą misję.
                     </p>
-                    <button class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
+                    <button id="support-cta-0" class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
                         DOWIEDZ SIĘ WIĘCEJ →
                     </button>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">02</span>
-                    <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wsparcie<br/>Regularne</h3>
-                    <p class="text-sm leading-relaxed font-light mb-8">
+                    <h3 id="support-title-1" class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wsparcie<br/>Regularne</h3>
+                    <p id="support-desc-1" class="text-sm leading-relaxed font-light mb-8">
                         Stań się stałym mecenasem kultury. Regularne wsparcie pozwala nam planować długoterminowe projekty.
                     </p>
-                    <button class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
+                    <button id="support-cta-1" class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
                         DOWIEDZ SIĘ WIĘCEJ →
                     </button>
                 </div>
                 <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">03</span>
-                    <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wolontariat</h3>
-                    <p class="text-sm leading-relaxed font-light mb-8">
+                    <h3 id="support-title-2" class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wolontariat</h3>
+                    <p id="support-desc-2" class="text-sm leading-relaxed font-light mb-8">
                         Poświęć swój czas i talenty. Dołącz do zespołu wolontariuszy wspierających nasze wydarzenia.
                     </p>
-                    <button class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
+                    <button id="support-cta-2" class="flex items-center gap-2 text-sm tracking-widest group-hover:gap-4 transition-all">
                         DOWIEDZ SIĘ WIĘCEJ →
                     </button>
                 </div>
             </section>
 
-            <!-- Contact Form -->
             <section class="px-6 lg:px-12 py-20 bg-black text-white">
                 <div class="max-w-4xl mx-auto">
-                    <h3 class="text-4xl lg:text-6xl font-bold mb-12">Skontaktuj się</h3>
+                    <h3 id="contact-title" class="text-4xl lg:text-6xl font-bold mb-12">Skontaktuj się</h3>
                     <div class="space-y-8">
                         <div>
-                            <label class="block text-xs tracking-widest mb-3 opacity-60">IMIĘ I NAZWISKO</label>
-                            <input 
-                                type="text" 
-                                name="name"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors cursor-text"
-                                required
-                            />
+                            <label id="contact-name-label" class="block text-xs tracking-widest mb-3 opacity-60">IMIĘ I NAZWISKO</label>
+                            <input type="text" class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none cursor-text" />
                         </div>
                         <div>
-                            <label class="block text-xs tracking-widest mb-3 opacity-60">EMAIL</label>
-                            <input 
-                                type="email" 
-                                name="email"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors cursor-text"
-                                required
-                            />
+                            <label id="contact-email-label" class="block text-xs tracking-widest mb-3 opacity-60">EMAIL</label>
+                            <input type="email" class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none cursor-text" />
                         </div>
                         <div>
-                            <label class="block text-xs tracking-widest mb-3 opacity-60">WIADOMOŚĆ</label>
-                            <textarea 
-                                name="message"
-                                rows="4"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors resize-none cursor-text"
-                                required
-                            ></textarea>
+                            <label id="contact-message-label" class="block text-xs tracking-widest mb-3 opacity-60">WIADOMOŚĆ</label>
+                            <textarea rows="4" class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none resize-none cursor-text"></textarea>
                         </div>
-                        <button 
-                            onclick="submitForm()"
-                            class="flex items-center gap-4 text-lg tracking-widest hover:gap-6 transition-all mt-8 hover:opacity-80 cursor-pointer"
-                        >
+                        <button id="contact-submit" onclick="submitForm()" class="flex items-center gap-4 text-lg tracking-widest hover:gap-6 transition-all cursor-pointer">
                             WYŚLIJ WIADOMOŚĆ →
                         </button>
                     </div>
@@ -445,82 +353,114 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-black px-6 lg:px-12 py-12">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-4xl font-bold mb-4">ARTIn</h3>
-                    <p class="text-sm font-light">Fundacja wspierająca polską kulturę i sztukę</p>
-                </div>
-                <div class="lg:text-right">
-                    <p class="text-sm mb-2">
-                        <a href="mailto:marzena@mikosz.net" class="hover:opacity-60 transition-opacity cursor-pointer">
-                            marzena@mikosz.net
-                        </a>
-                    </p>
-                    <p class="text-xs tracking-widest mt-8 opacity-60">© 2025 FUNDACJA ARTIn</p>
-                </div>
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-4xl font-bold mb-4">ARTIn</h3>
+                <p id="footer-tagline" class="text-sm font-light">Fundacja wspierająca polską kulturę i sztukę</p>
+            </div>
+            <div class="lg:text-right">
+                <p class="text-sm mb-2">
+                    <a href="mailto:marzena@mikosz.net" class="hover:opacity-60 transition-opacity cursor-pointer">marzena@mikosz.net</a>
+                </p>
+                <p id="footer-copyright" class="text-xs tracking-widest mt-8 opacity-60">© 2025 FUNDACJA ARTIn</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/gh/agamaciag/artin-translations@main/translations.js"></script>
     <script>
-        // Tab navigation with smooth transitions
+        let currentLang = localStorage.getItem('artinLang') || 'pl';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('artinLang', lang);
+            updateContent();
+            updateLangButtons();
+        }
+
+        function updateLangButtons() {
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('lang-' + currentLang);
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        function updateContent() {
+            if (typeof translations === 'undefined') return;
+            const t = translations[currentLang];
+            
+            document.title = `ARTIn - ${t.nav.about}`;
+            document.getElementById('nav-about').textContent = t.nav.about;
+            document.getElementById('nav-events').textContent = t.nav.events;
+            document.getElementById('nav-support').textContent = t.nav.support;
+            document.getElementById('mobile-nav-about').innerHTML = `<span class="text-xs opacity-60">01</span> ${t.nav.about}`;
+            document.getElementById('mobile-nav-events').innerHTML = `<span class="text-xs opacity-60">02</span> ${t.nav.events}`;
+            document.getElementById('mobile-nav-support').innerHTML = `<span class="text-xs opacity-60">03</span> ${t.nav.support}`;
+            document.getElementById('hero-title').innerHTML = t.hero.title;
+            document.getElementById('hero-mission').textContent = t.hero.mission;
+            document.getElementById('mission-statement').textContent = t.statement;
+            document.getElementById('split-title').innerHTML = t.split.title;
+            document.getElementById('split-text').textContent = t.split.text;
+            
+            t.activities.forEach((activity, i) => {
+                document.getElementById(`activity-title-${i}`).innerHTML = activity.title;
+                document.getElementById(`activity-desc-${i}`).textContent = activity.desc;
+            });
+            
+            document.getElementById('events-title').innerHTML = t.events.title;
+            t.events.items.forEach((event, i) => {
+                document.getElementById(`event-date-${i}`).textContent = event.date;
+                document.getElementById(`event-title-${i}`).textContent = event.title;
+                document.getElementById(`event-location-${i}`).textContent = event.location;
+                document.getElementById(`event-desc-${i}`).textContent = event.desc;
+                document.getElementById(`event-time-${i}`).textContent = `${t.support.contact.time}: ${event.time}`;
+            });
+            
+            document.getElementById('support-title').innerHTML = t.support.title;
+            document.getElementById('support-subtitle').textContent = t.support.subtitle;
+            t.support.options.forEach((option, i) => {
+                document.getElementById(`support-title-${i}`).innerHTML = option.title;
+                document.getElementById(`support-desc-${i}`).textContent = option.desc;
+                document.getElementById(`support-cta-${i}`).textContent = option.cta;
+            });
+            
+            document.getElementById('contact-title').textContent = t.support.contact.title;
+            document.getElementById('contact-name-label').textContent = t.support.contact.name;
+            document.getElementById('contact-email-label').textContent = t.support.contact.email;
+            document.getElementById('contact-message-label').textContent = t.support.contact.message;
+            document.getElementById('contact-submit').innerHTML = t.support.contact.submit + ' →';
+            document.getElementById('footer-tagline').textContent = t.footer.tagline;
+            document.getElementById('footer-copyright').textContent = t.footer.copyright;
+        }
+
         function showTab(tabName) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            
-            // Show selected tab
-            const selectedTab = document.getElementById(tabName + '-content');
-            selectedTab.classList.remove('hidden');
-            selectedTab.classList.add('animate-fade-in');
-            
-            // Update button states
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+            document.getElementById(tabName + '-content').classList.remove('hidden');
+            document.getElementById(tabName + '-content').classList.add('animate-fade-in');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('tab-' + tabName).classList.add('active');
-            
-            // Scroll to top smoothly
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mobile menu toggle
         function toggleMobile() {
-            const menu = document.getElementById('mobile-menu');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-            
-            menu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+            document.getElementById('menu-icon').classList.toggle('hidden');
+            document.getElementById('close-icon').classList.toggle('hidden');
         }
 
-        // Event expansion toggle
-        function toggleEvent(index) {
-            const eventDetail = document.getElementById('event-' + index);
-            eventDetail.classList.toggle('hidden');
+        function toggleEvent(i) {
+            document.getElementById('event-' + i).classList.toggle('hidden');
         }
 
-        // Form submission
         function submitForm() {
-            alert('Dziękujemy za wiadomość! Skontaktujemy się wkrótce.');
-            // In production, you would send this to a backend or email service
+            const t = translations[currentLang];
+            alert(currentLang === 'pl' ? 'Dziękujemy za wiadomość!' : currentLang === 'en' ? 'Thank you for your message!' : 'Danke für Ihre Nachricht!');
         }
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        window.onload = () => {
+            updateLangButtons();
+            if (typeof translations !== 'undefined') updateContent();
+        };
     </script>
 </body>
 </html>
