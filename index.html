@@ -35,22 +35,7 @@
             animation: fade-in 0.6s ease-out;
         }
         
-        * {
-            cursor: none !important;
-        }
-        
-        #cursor {
-            position: fixed;
-            width: 16px;
-            height: 16px;
-            background: black;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: all 0.1s ease-out;
-            transform: translate(-50%, -50%);
-        }
+        /* Normal cursor - removed custom cursor */
         
         /* Smooth scrolling */
         html {
@@ -85,9 +70,6 @@
     </style>
 </head>
 <body class="bg-white text-black antialiased">
-    <!-- Custom cursor -->
-    <div id="cursor"></div>
-
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-40 border-b border-black">
         <div class="max-w-full px-6 lg:px-12 py-6">
@@ -100,22 +82,22 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden lg:flex flex-col items-end space-y-2">
-                    <button onclick="showTab('onas')" id="tab-onas" class="tab-btn active text-right transition-all duration-300">
+                    <button onclick="showTab('onas')" id="tab-onas" class="tab-btn active text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">01</span>
                         <span class="text-2xl ml-4">O nas</span>
                     </button>
-                    <button onclick="showTab('wydarzenia')" id="tab-wydarzenia" class="tab-btn text-right transition-all duration-300">
+                    <button onclick="showTab('wydarzenia')" id="tab-wydarzenia" class="tab-btn text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">02</span>
                         <span class="text-2xl ml-4">Wydarzenia</span>
                     </button>
-                    <button onclick="showTab('wspieraj')" id="tab-wspieraj" class="tab-btn text-right transition-all duration-300">
+                    <button onclick="showTab('wspieraj')" id="tab-wspieraj" class="tab-btn text-right transition-all duration-300 cursor-pointer">
                         <span class="text-xs opacity-60">03</span>
                         <span class="text-2xl ml-4">Wspieraj nas</span>
                     </button>
                 </div>
 
                 <!-- Mobile menu button -->
-                <button onclick="toggleMobile()" class="lg:hidden p-2" id="mobile-btn" aria-label="Menu">
+                <button onclick="toggleMobile()" class="lg:hidden p-2 cursor-pointer" id="mobile-btn" aria-label="Menu">
                     <svg id="menu-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -132,13 +114,13 @@
         <!-- Mobile Navigation -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-black">
             <div class="px-6 py-8 space-y-4">
-                <button onclick="showTab('onas'); toggleMobile()" class="block w-full text-left text-2xl font-bold">
+                <button onclick="showTab('onas'); toggleMobile()" class="block w-full text-left text-2xl font-bold cursor-pointer">
                     <span class="text-xs opacity-60">01</span> O nas
                 </button>
-                <button onclick="showTab('wydarzenia'); toggleMobile()" class="block w-full text-left text-2xl font-light">
+                <button onclick="showTab('wydarzenia'); toggleMobile()" class="block w-full text-left text-2xl font-light cursor-pointer">
                     <span class="text-xs opacity-60">02</span> Wydarzenia
                 </button>
-                <button onclick="showTab('wspieraj'); toggleMobile()" class="block w-full text-left text-2xl font-light">
+                <button onclick="showTab('wspieraj'); toggleMobile()" class="block w-full text-left text-2xl font-light cursor-pointer">
                     <span class="text-xs opacity-60">03</span> Wspieraj nas
                 </button>
             </div>
@@ -154,7 +136,7 @@
                 <div class="max-w-7xl mx-auto">
                     <div class="grid lg:grid-cols-12 gap-12">
                         <div class="lg:col-span-7">
-                            <h2 class="text-6xl lg:text-8xl font-bold leading-none mb-8">
+                            <h2 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-none mb-8">
                                 Wspieranie<br/>i propagowanie<br/>polskiej kultury
                             </h2>
                         </div>
@@ -176,6 +158,7 @@
                     alt="Dłonie pianisty na klawiaturze fortepianu Yamaha"
                     class="w-full h-auto object-cover"
                     loading="lazy"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: piano-hands.jpg</p></div>'"
                 />
             </section>
 
@@ -208,48 +191,49 @@
                         alt="Pianista wykonujący koncert w sali koncertowej"
                         class="w-full h-full object-cover"
                         loading="lazy"
+                        onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-full bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: concert-hall.jpg</p></div>'"
                     />
                 </div>
             </section>
 
             <!-- Activities Grid -->
             <section class="grid lg:grid-cols-3">
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">01</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Koncertowa</h3>
                     <p class="text-sm leading-relaxed font-light">
                         Fundacja prowadzi działalność koncertową, organizując wydarzenia muzyczne promujące polskich kompozytorów i wykonawców.
                     </p>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">02</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Wystawiennicza</h3>
                     <p class="text-sm leading-relaxed font-light">
                         Organizujemy wystawy i prezentacje dzieł sztuki, tworząc przestrzenie dialogu między artystami a publicznością.
                     </p>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">03</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Działalność<br/>Edukacyjna</h3>
                     <p class="text-sm leading-relaxed font-light">
                         Prowadzimy programy edukacyjne i warsztaty, rozwijając wrażliwość kulturalną i artystyczną uczestników.
                     </p>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">04</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Wsparcie<br/>Twórców</h3>
                     <p class="text-sm leading-relaxed font-light">
                         Wspieramy twórców i artystów, inicjując przedsięwzięcia kulturalne i edukacyjne na rzecz rozwoju polskiej sceny artystycznej.
                     </p>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">05</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Dialog<br/>Międzykulturowy</h3>
                     <p class="text-sm leading-relaxed font-light">
                         Rozwijamy dialog międzykulturowy i integrację, budując więzi społeczne poprzez sztukę i kulturę.
                     </p>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">06</span>
                     <h3 class="text-3xl font-bold mb-6 leading-tight">Dziedzictwo<br/>Kulturowe</h3>
                     <p class="text-sm leading-relaxed font-light">
@@ -265,6 +249,7 @@
                     alt="Zespół muzyków podczas występu"
                     class="w-full h-auto object-cover"
                     loading="lazy"
+                    onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: musicians-group.jpg</p></div>'"
                 />
             </section>
         </div>
@@ -284,6 +269,7 @@
                             alt="Sesja edukacyjna muzyczna"
                             class="w-full h-auto object-cover"
                             loading="lazy"
+                            onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-full h-96 lg:h-[600px] bg-gray-200 flex items-center justify-center\'><p class=\'text-gray-500\'>Zdjęcie: music-education.jpg</p></div>'"
                         />
                     </div>
 
@@ -372,7 +358,7 @@
 
             <!-- Support Options -->
             <section class="grid lg:grid-cols-3">
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">01</span>
                     <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Jednorazowa<br/>Darowizna</h3>
                     <p class="text-sm leading-relaxed font-light mb-8">
@@ -382,7 +368,7 @@
                         DOWIEDZ SIĘ WIĘCEJ →
                     </button>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">02</span>
                     <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wsparcie<br/>Regularne</h3>
                     <p class="text-sm leading-relaxed font-light mb-8">
@@ -392,7 +378,7 @@
                         DOWIEDZ SIĘ WIĘCEJ →
                     </button>
                 </div>
-                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group">
+                <div class="border-b border-r border-black p-8 lg:p-12 hover-invert transition-all duration-500 group cursor-pointer">
                     <span class="text-xs tracking-widest block mb-4 opacity-60">03</span>
                     <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight">Wolontariat</h3>
                     <p class="text-sm leading-relaxed font-light mb-8">
@@ -414,7 +400,7 @@
                             <input 
                                 type="text" 
                                 name="name"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors"
+                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors cursor-text"
                                 required
                             />
                         </div>
@@ -423,7 +409,7 @@
                             <input 
                                 type="email" 
                                 name="email"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors"
+                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors cursor-text"
                                 required
                             />
                         </div>
@@ -432,13 +418,13 @@
                             <textarea 
                                 name="message"
                                 rows="4"
-                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors resize-none"
+                                class="w-full bg-transparent border-b border-white py-3 text-xl focus:outline-none focus:border-gray-400 transition-colors resize-none cursor-text"
                                 required
                             ></textarea>
                         </div>
                         <button 
                             onclick="submitForm()"
-                            class="flex items-center gap-4 text-lg tracking-widest hover:gap-6 transition-all mt-8 hover:opacity-80"
+                            class="flex items-center gap-4 text-lg tracking-widest hover:gap-6 transition-all mt-8 hover:opacity-80 cursor-pointer"
                         >
                             WYŚLIJ WIADOMOŚĆ →
                         </button>
@@ -458,7 +444,7 @@
                 </div>
                 <div class="lg:text-right">
                     <p class="text-sm mb-2">
-                        <a href="mailto:marzena@mikosz.net" class="hover:opacity-60 transition-opacity">
+                        <a href="mailto:marzena@mikosz.net" class="hover:opacity-60 transition-opacity cursor-pointer">
                             marzena@mikosz.net
                         </a>
                     </p>
@@ -469,18 +455,6 @@
     </footer>
 
     <script>
-        // Custom cursor follower
-        const cursor = document.getElementById('cursor');
-        let mouseX = 0;
-        let mouseY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-        });
-
         // Tab navigation with smooth transitions
         function showTab(tabName) {
             // Hide all tabs
