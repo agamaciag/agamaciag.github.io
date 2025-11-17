@@ -29,28 +29,28 @@
     <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md z-50 border-b border-black">
         <div class="max-w-full px-6 lg:px-12 py-3">
             <div class="flex justify-between items-center">
-                <a href="#home" class="flex flex-col scroll-smooth">
-                    <h1 class="text-3xl lg:text-5xl font-black tracking-tight leading-none hover:opacity-70 transition-opacity">ARTIn</h1>
-                    <span class="text-xs tracking-widest mt-0.5 opacity-60">FUNDACJA</span>
+                <a href="#home" class="flex flex-col scroll-smooth group">
+                    <h1 class="text-3xl lg:text-5xl font-black tracking-tight leading-none group-hover:opacity-70 transition-opacity duration-300">ARTIn</h1>
+                    <span class="text-xs tracking-widest mt-0.5 opacity-60 group-hover:opacity-100 transition-opacity duration-300">FUNDACJA</span>
                 </a>
 
                 <!-- Desktop Menu -->
                 <div class="hidden lg:flex flex-col items-end space-y-1">
                     <nav class="flex gap-4 text-xs mb-3 items-center">
-                        <a href="#misja" class="nav-link opacity-60 hover:opacity-100 transition-opacity">Misja</a>
+                        <a href="#misja" class="nav-link opacity-60 hover:opacity-100 transition-opacity duration-300">Misja</a>
                         <span class="opacity-30">/</span>
-                        <a href="#codziałamy" class="nav-link opacity-60 hover:opacity-100 transition-opacity">Co robimy</a>
+                        <a href="#codziałamy" class="nav-link opacity-60 hover:opacity-100 transition-opacity duration-300">Co robimy</a>
                         <span class="opacity-30">/</span>
-                        <a href="#archiwum" class="nav-link opacity-60 hover:opacity-100 transition-opacity">Archiwum</a>
+                        <a href="#archiwum" class="nav-link opacity-60 hover:opacity-100 transition-opacity duration-300">Archiwum</a>
                         <span class="opacity-30">/</span>
-                        <a href="#onas" class="nav-link opacity-60 hover:opacity-100 transition-opacity">O nas</a>
+                        <a href="#onas" class="nav-link opacity-60 hover:opacity-100 transition-opacity duration-300">O nas</a>
                         <span class="opacity-30">/</span>
-                        <a href="#kontakt" class="nav-link opacity-60 hover:opacity-100 transition-opacity">Kontakt</a>
+                        <a href="#kontakt" class="nav-link opacity-60 hover:opacity-100 transition-opacity duration-300">Kontakt</a>
                     </nav>
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="lg:hidden p-2 cursor-pointer hover:opacity-60 transition-opacity">
+                <button id="mobile-menu-btn" class="lg:hidden p-2 cursor-pointer hover:opacity-60 transition-opacity duration-300 active:scale-95">
                     <svg id="menu-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -67,28 +67,28 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-black animate-slide-down">
             <div class="px-6 py-4 space-y-2">
-                <a href="#misja" class="block text-sm font-light hover:font-bold transition-all">Misja</a>
-                <a href="#codziałamy" class="block text-sm font-light hover:font-bold transition-all">Co robimy</a>
-                <a href="#archiwum" class="block text-sm font-light hover:font-bold transition-all">Archiwum</a>
-                <a href="#onas" class="block text-sm font-light hover:font-bold transition-all">O nas</a>
-                <a href="#kontakt" class="block text-sm font-light hover:font-bold transition-all">Kontakt</a>
+                <a href="#misja" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Misja</a>
+                <a href="#codziałamy" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Co robimy</a>
+                <a href="#archiwum" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Archiwum</a>
+                <a href="#onas" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">O nas</a>
+                <a href="#kontakt" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <main class="pt-24 lg:pt-28">
+    <main class="pt-32 lg:pt-40">
         <!-- MISJA -->
         <section id="misja" class="px-6 lg:px-12 py-16 lg:py-24 border-b border-black animate-fade-in-up">
             <div class="max-w-7xl mx-auto">
                 <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
                     <div>
-                        <span class="text-xs tracking-widest opacity-60 mb-6 block animate-fade-in">NASZA MISJA</span>
-                        <h2 class="text-4xl lg:text-6xl font-black leading-tight mb-6 animate-fade-in-up-delay">
-                            Wspieranie polskiej kultury
+                        <span class="text-xs tracking-widest opacity-60 mb-6 block animate-fade-in inline-block hover:opacity-100 transition-opacity duration-300">NASZA MISJA</span>
+                        <h2 class="text-4xl lg:text-6xl font-black leading-tight mb-6 animate-fade-in-up-delay group">
+                            <span class="block group-hover:translate-x-2 transition-transform duration-500">Wspieranie polskiej kultury</span>
                         </h2>
                     </div>
                     <div class="flex items-center">
-                        <p class="text-base lg:text-lg font-light leading-relaxed animate-fade-in-up-delay-2">
+                        <p class="text-base lg:text-lg font-light leading-relaxed animate-fade-in-up-delay-2 hover:opacity-80 transition-opacity duration-300">
                             Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie. Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
                         </p>
                     </div>
@@ -96,39 +96,41 @@
             </div>
         </section>
 
-        <section class="border-b border-black h-64 lg:h-96 overflow-hidden">
-            <img src="images/piano-hands.jpg" alt="Piano hands - Misja ARTIn" class="w-full h-full object-cover hover-zoom" loading="lazy" />
+        <section class="border-b border-black h-64 lg:h-96 overflow-hidden group">
+            <img src="images/piano-hands.jpg" alt="Piano hands - Misja ARTIn" class="w-full h-full object-cover hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
         </section>
 
         <!-- CO ROBIMY -->
         <section id="codziałamy" class="px-6 lg:px-12 py-16 lg:py-24 border-b border-black animate-fade-in-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up">Co robimy</h2>
+                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up group hover:opacity-80 transition-opacity duration-300">
+                    <span class="block group-hover:translate-x-2 transition-transform duration-500">Co robimy</span>
+                </h2>
 
-                <div class="space-y-20">
+                <div class="space-y-12">
                     <!-- Koncerty -->
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="animate-fade-in-up-delay">
-                            <span class="text-xs tracking-widest opacity-60 mb-3 block">01</span>
-                            <h3 class="text-3xl lg:text-4xl font-black mb-4">Koncerty</h3>
-                            <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center animate-fade-in-up-delay group">
+                        <div class="group-hover:translate-x-1 transition-transform duration-500">
+                            <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100 transition-opacity duration-300">01</span>
+                            <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-x-2 transition-transform duration-500">Koncerty</h3>
+                            <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
                                 Organizujemy koncerty i wydarzenia muzyczne promujące polskich kompozytorów i wykonawców zarówno w kraju jak i za granicą.
                             </p>
                         </div>
-                        <div class="h-64 lg:h-80 overflow-hidden rounded-lg hover-zoom-container">
-                            <img src="images/concert-hall.jpg" alt="Sala koncertowa" class="w-full h-full object-cover hover-zoom" loading="lazy" />
+                        <div class="h-56 md:h-64 lg:h-80 overflow-hidden rounded-lg hover-zoom-container group-hover:shadow-2xl transition-shadow duration-500">
+                            <img src="images/concert-hall.jpg" alt="Sala koncertowa" class="w-full h-full object-cover hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
                         </div>
                     </div>
 
                     <!-- Festiwale -->
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div class="h-64 lg:h-80 overflow-hidden rounded-lg hover-zoom-container lg:order-2">
-                            <img src="images/musicians-group.jpg" alt="Muzycy" class="w-full h-full object-cover hover-zoom" loading="lazy" />
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center animate-fade-in-up-delay-2 group">
+                        <div class="h-56 md:h-64 lg:h-80 overflow-hidden rounded-lg hover-zoom-container group-hover:shadow-2xl transition-shadow duration-500 order-2 lg:order-1">
+                            <img src="images/musicians-group.jpg" alt="Muzycy" class="w-full h-full object-cover hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
                         </div>
-                        <div class="animate-fade-in-up-delay lg:order-1">
-                            <span class="text-xs tracking-widest opacity-60 mb-3 block">02</span>
-                            <h3 class="text-3xl lg:text-4xl font-black mb-4">Festiwale</h3>
-                            <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700">
+                        <div class="group-hover:translate-x-1 transition-transform duration-500 order-1 lg:order-2">
+                            <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100 transition-opacity duration-300">02</span>
+                            <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-x-2 transition-transform duration-500">Festiwale</h3>
+                            <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
                                 Wspieramy i organizujemy festiwale, które łączą artystów, publiczność i kulturę w wyjątkowe doświadczenia.
                             </p>
                         </div>
@@ -136,26 +138,26 @@
 
                     <!-- Wystawy, Edukacja, Ochrona -->
                     <div class="grid lg:grid-cols-3 gap-6">
-                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay">
-                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100">03</span>
-                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform">Wystawy</h3>
-                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70">
+                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay hover:shadow-xl hover:scale-105">
+                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100 transition-opacity duration-300">03</span>
+                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform duration-500">Wystawy</h3>
+                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70 transition-opacity duration-300">
                                 Organizujemy wystawy sztuki współczesnej i tradycyjnej, tworząc przestrzenie dialogu między artystami a publicznością.
                             </p>
                         </div>
 
-                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay-2">
-                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100">04</span>
-                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform">Edukacja</h3>
-                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70">
+                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay-2 hover:shadow-xl hover:scale-105">
+                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100 transition-opacity duration-300">04</span>
+                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform duration-500">Edukacja</h3>
+                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70 transition-opacity duration-300">
                                 Prowadzimy programy edukacyjne i warsztaty rozwijające wrażliwość kulturalną i artystyczną uczestników.
                             </p>
                         </div>
 
-                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay-3">
-                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100">05</span>
-                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform">Ochrona Dziedzictwa</h3>
-                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70">
+                        <div class="border border-black p-6 lg:p-8 hover-invert transition-all duration-500 cursor-pointer group animate-fade-in-up-delay-3 hover:shadow-xl hover:scale-105">
+                            <span class="text-xs tracking-widest opacity-60 mb-4 block group-hover:opacity-100 transition-opacity duration-300">05</span>
+                            <h3 class="text-2xl font-black mb-4 group-hover:translate-y-1 transition-transform duration-500">Ochrona Dziedzictwa</h3>
+                            <p class="text-xs font-light leading-relaxed group-hover:opacity-100 opacity-70 transition-opacity duration-300">
                                 Dbamy o zachowanie i popularyzację polskiego dziedzictwa kulturowego oraz promocję Polski na arenie międzynarodowej.
                             </p>
                         </div>
@@ -167,25 +169,27 @@
         <!-- ARCHIWUM -->
         <section id="archiwum" class="px-6 lg:px-12 py-16 lg:py-24 border-b border-black animate-fade-in-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up">Archiwum Projektów</h2>
+                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up group hover:opacity-80 transition-opacity duration-300">
+                    <span class="block group-hover:translate-x-2 transition-transform duration-500">Archiwum Projektów</span>
+                </h2>
 
                 <div class="space-y-16">
                     <!-- Projekt 1 -->
-                    <div class="border border-black p-8 lg:p-12 hover:border-gray-400 transition-colors duration-300 animate-fade-in-up-delay group cursor-pointer">
+                    <div class="border border-black p-8 lg:p-12 hover:border-gray-400 transition-all duration-300 animate-fade-in-up-delay group cursor-pointer hover:shadow-2xl hover:scale-101">
                         <div class="grid lg:grid-cols-3 gap-12">
-                            <div class="lg:col-span-2">
-                                <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100">SOLIDARITÄTSKONZERT</span>
-                                <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-x-2 transition-transform">Koncert na rzecz powodzian</h3>
-                                <p class="text-sm lg:text-base font-light leading-relaxed mb-6 text-gray-700">
+                            <div class="lg:col-span-2 group-hover:translate-x-2 transition-transform duration-500">
+                                <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100 transition-opacity duration-300">SOLIDARITÄTSKONZERT</span>
+                                <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-y-1 transition-transform duration-500">Koncert na rzecz powodzian</h3>
+                                <p class="text-sm lg:text-base font-light leading-relaxed mb-6 text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
                                     Organizacja koncertu charytatywnego w Szwajcarii z udziałem wybitnych polskich muzyków występujących na najlepszych szwajcarskich scenach.
                                 </p>
-                                <div class="bg-black text-white p-6 inline-block">
+                                <div class="bg-black text-white p-6 inline-block group-hover:bg-gray-900 transition-colors duration-300 hover:scale-105 transform">
                                     <p class="text-xs opacity-80 mb-1">Zebrana suma</p>
                                     <p class="text-3xl font-black">6 400 CHF</p>
                                     <p class="text-xs opacity-80 mt-1">przekazane mieszkańcom gminy Wleń</p>
                                 </div>
                             </div>
-                            <div>
+                            <div class="group-hover:opacity-100 opacity-80 transition-opacity duration-300">
                                 <p class="text-xs font-light opacity-70 mb-4">
                                     <strong class="opacity-100">Lokalizacja</strong><br/>
                                     Szwajcaria
@@ -200,16 +204,16 @@
                     </div>
 
                     <!-- Projekt 2 -->
-                    <div class="border border-black p-8 lg:p-12 hover:border-gray-400 transition-colors duration-300 animate-fade-in-up-delay-2 group cursor-pointer">
+                    <div class="border border-black p-8 lg:p-12 hover:border-gray-400 transition-all duration-300 animate-fade-in-up-delay-2 group cursor-pointer hover:shadow-2xl hover:scale-101">
                         <div class="grid lg:grid-cols-3 gap-12">
-                            <div class="lg:col-span-2">
-                                <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100">PADDYMANIA</span>
-                                <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-x-2 transition-transform">Festiwal Paderewskiego</h3>
-                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700">
+                            <div class="lg:col-span-2 group-hover:translate-x-2 transition-transform duration-500">
+                                <span class="text-xs tracking-widest opacity-60 mb-3 block group-hover:opacity-100 transition-opacity duration-300">PADDYMANIA</span>
+                                <h3 class="text-3xl lg:text-4xl font-black mb-4 group-hover:translate-y-1 transition-transform duration-500">Festiwal Paderewskiego</h3>
+                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
                                     Wspieranie i organizacja Festiwalu Paderewskiego w Morges, celebrującego spuściznę wielkiego polskiego kompozytora i pianisty Ignacego Jana Paderewskiego.
                                 </p>
                             </div>
-                            <div>
+                            <div class="group-hover:opacity-100 opacity-80 transition-opacity duration-300">
                                 <p class="text-xs font-light opacity-70 mb-4">
                                     <strong class="opacity-100">Lokalizacja</strong><br/>
                                     Morges, Szwajcaria
@@ -228,32 +232,34 @@
         <!-- O NAS -->
         <section id="onas" class="px-6 lg:px-12 py-16 lg:py-24 border-b border-black bg-gray-50 animate-fade-in-up">
             <div class="max-w-7xl mx-auto">
-                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up">O nas</h2>
+                <h2 class="text-4xl lg:text-6xl font-black mb-16 animate-fade-in-up group hover:opacity-80 transition-opacity duration-300">
+                    <span class="block group-hover:translate-x-2 transition-transform duration-500">O nas</span>
+                </h2>
 
                 <div class="space-y-16">
                     <!-- Barbara -->
-                    <div class="border-b border-black pb-16 animate-fade-in-up-delay">
-                        <h3 class="text-3xl lg:text-4xl font-black mb-6">Barbara Maciąg</h3>
-                        <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 max-w-3xl">
+                    <div class="border-b border-black pb-16 animate-fade-in-up-delay group hover:bg-white p-8 rounded-lg transition-all duration-300">
+                        <h3 class="text-3xl lg:text-4xl font-black mb-6 group-hover:translate-x-2 transition-transform duration-500">Barbara Maciąg</h3>
+                        <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 max-w-3xl group-hover:text-gray-900 transition-colors duration-300">
                             Współzałożycielka Fundacji ARTIn, zaangażowana w promocję polskiej kultury i sztuki zarówno w kraju jak i poza jego granicami.
                         </p>
                     </div>
 
                     <!-- Marzena -->
-                    <div class="animate-fade-in-up-delay-2">
-                        <h3 class="text-3xl lg:text-4xl font-black mb-6">Marzena Mikosz</h3>
+                    <div class="animate-fade-in-up-delay-2 group hover:bg-white p-8 rounded-lg transition-all duration-300">
+                        <h3 class="text-3xl lg:text-4xl font-black mb-6 group-hover:translate-x-2 transition-transform duration-500">Marzena Mikosz</h3>
                         <div class="grid lg:grid-cols-2 gap-12">
-                            <div>
-                                <p class="text-sm lg:text-base font-black mb-4">Producentka, event manager, animatorka i promotorka kultury</p>
-                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 mb-4">
+                            <div class="group-hover:translate-x-1 transition-transform duration-500">
+                                <p class="text-sm lg:text-base font-black mb-4 group-hover:opacity-90 transition-opacity duration-300">Producentka, event manager, animatorka i promotorka kultury</p>
+                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 mb-4 group-hover:text-gray-900 transition-colors duration-300">
                                     Absolwentka archeologii i zarządzania marketingowego. Od ponad 20 lat zajmuje się promocją polskiej kultury na terenie Polski i poza jej granicami.
                                 </p>
                             </div>
-                            <div>
-                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 mb-4">
+                            <div class="group-hover:translate-x-1 transition-transform duration-500">
+                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 mb-4 group-hover:text-gray-900 transition-colors duration-300">
                                     Jako rzecznik prasowy festiwalu Pieśń Naszych Korzeni w Jarosławiu i Baltic Opera Festival opracowywała materiały prasowe, koordynowała pracę biura oraz współpracowała z dziennikarzami mediów lokalnych, ogólnopolskich i światowych, w tym BBC Radio 3, MDR Klassik, Limelight Magazine i Times UK.
                                 </p>
-                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700">
+                                <p class="text-sm lg:text-base font-light leading-relaxed text-gray-700 group-hover:text-gray-900 transition-colors duration-300">
                                     Projekty, które koordynowała, zdobywały liczne nagrody: International Classical Music Awards, Gramophone Award, Nagroda Specjalna Polskiego Instytutu Sztuki Filmowej, MocArt Radia RMF Classic i nominacje do polskiej nagrody muzycznej Fryderyki.
                                 </p>
                             </div>
@@ -266,44 +272,46 @@
         <!-- KONTAKT -->
         <section id="kontakt" class="px-6 lg:px-12 py-16 lg:py-24 bg-black text-white animate-fade-in-up">
             <div class="max-w-4xl mx-auto">
-                <h2 class="text-4xl lg:text-6xl font-black mb-12 animate-fade-in-up">Skontaktuj się</h2>
+                <h2 class="text-4xl lg:text-6xl font-black mb-12 animate-fade-in-up group hover:opacity-80 transition-opacity duration-300">
+                    <span class="block group-hover:translate-x-2 transition-transform duration-500">Skontaktuj się</span>
+                </h2>
 
                 <form id="contact-form" class="space-y-6 mb-16">
-                    <div class="animate-fade-in-up-delay">
-                        <label class="block text-xs tracking-widest mb-3 opacity-60">IMIĘ I NAZWISKO</label>
-                        <input type="text" name="name" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-400 transition-colors cursor-text" placeholder="Wpisz swoje imię i nazwisko" />
+                    <div class="animate-fade-in-up-delay group">
+                        <label class="block text-xs tracking-widest mb-3 opacity-60 group-hover:opacity-100 transition-opacity duration-300">IMIĘ I NAZWISKO</label>
+                        <input type="text" name="name" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-300 focus:bg-gray-900/20 transition-all duration-300 cursor-text group-hover:border-gray-400" placeholder="Wpisz swoje imię i nazwisko" />
                     </div>
 
-                    <div class="animate-fade-in-up-delay-2">
-                        <label class="block text-xs tracking-widest mb-3 opacity-60">EMAIL</label>
-                        <input type="email" name="email" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-400 transition-colors cursor-text" placeholder="Wpisz swój email" />
+                    <div class="animate-fade-in-up-delay-2 group">
+                        <label class="block text-xs tracking-widest mb-3 opacity-60 group-hover:opacity-100 transition-opacity duration-300">EMAIL</label>
+                        <input type="email" name="email" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-300 focus:bg-gray-900/20 transition-all duration-300 cursor-text group-hover:border-gray-400" placeholder="Wpisz swój email" />
                     </div>
 
-                    <div class="animate-fade-in-up-delay-3">
-                        <label class="block text-xs tracking-widest mb-3 opacity-60">WIADOMOŚĆ</label>
-                        <textarea name="message" rows="3" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-400 transition-colors resize-none cursor-text" placeholder="Wpisz swoją wiadomość"></textarea>
+                    <div class="animate-fade-in-up-delay-3 group">
+                        <label class="block text-xs tracking-widest mb-3 opacity-60 group-hover:opacity-100 transition-opacity duration-300">WIADOMOŚĆ</label>
+                        <textarea name="message" rows="3" required class="w-full bg-transparent border-b border-white py-2 text-sm lg:text-base focus:outline-none focus:border-gray-300 focus:bg-gray-900/20 transition-all duration-300 resize-none cursor-text group-hover:border-gray-400" placeholder="Wpisz swoją wiadomość"></textarea>
                     </div>
 
-                    <button type="submit" class="inline-flex items-center gap-3 text-xs lg:text-sm tracking-widest font-black hover:gap-4 transition-all cursor-pointer pt-6 hover:opacity-70">
+                    <button type="submit" class="inline-flex items-center gap-3 text-xs lg:text-sm tracking-widest font-black hover:gap-5 transition-all duration-500 cursor-pointer pt-6 hover:opacity-70 active:scale-95 group">
                         WYŚLIJ WIADOMOŚĆ
-                        <span class="inline-block">→</span>
+                        <span class="inline-block group-hover:translate-x-2 transition-transform duration-500">→</span>
                     </button>
                 </form>
 
                 <div class="border-t border-gray-800 pt-12 space-y-6 text-sm">
-                    <div>
-                        <p class="text-xs tracking-widest mb-2 opacity-60">EMAIL</p>
-                        <a href="mailto:ArtInFoundation@gmail.com" class="hover:opacity-70 transition-opacity">ArtInFoundation@gmail.com</a>
+                    <div class="hover:opacity-80 transition-opacity duration-300 group">
+                        <p class="text-xs tracking-widest mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">EMAIL</p>
+                        <a href="mailto:ArtInFoundation@gmail.com" class="hover:translate-x-1 transition-transform duration-300 inline-block">ArtInFoundation@gmail.com</a>
                     </div>
 
-                    <div>
-                        <p class="text-xs tracking-widest mb-2 opacity-60">ADRES</p>
-                        <p>Grzybowska 2/31<br/>00-131 Warszawa, Polska</p>
+                    <div class="hover:opacity-80 transition-opacity duration-300 group">
+                        <p class="text-xs tracking-widest mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">ADRES</p>
+                        <p class="group-hover:translate-x-1 transition-transform duration-300">Grzybowska 2/31<br/>00-131 Warszawa, Polska</p>
                     </div>
 
-                    <div>
-                        <p class="text-xs tracking-widest mb-2 opacity-60">DANE FUNDACJI</p>
-                        <p class="text-xs opacity-80">
+                    <div class="hover:opacity-80 transition-opacity duration-300 group">
+                        <p class="text-xs tracking-widest mb-2 opacity-60 group-hover:opacity-100 transition-opacity duration-300">DANE FUNDACJI</p>
+                        <p class="text-xs opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                             NIP: 5253057607 | KRS: 0001189360<br/>
                             REGON: 542484834<br/>
                             Konto: 79 2530 0008 2090 1088 0820 0001
@@ -317,13 +325,13 @@
     <!-- Footer -->
     <footer class="border-t border-black px-6 lg:px-12 py-8 bg-white">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12">
-            <div>
-                <h3 class="text-2xl font-black mb-2">ARTIn</h3>
-                <p class="text-xs font-light opacity-70">Fundacja wspierająca polską kulturę i sztukę w kraju i za granicą</p>
+            <div class="group hover:opacity-80 transition-opacity duration-300">
+                <h3 class="text-2xl font-black mb-2 group-hover:translate-x-1 transition-transform duration-300">ARTIn</h3>
+                <p class="text-xs font-light opacity-70 group-hover:opacity-100 transition-opacity duration-300">Fundacja wspierająca polską kulturę i sztukę w kraju i za granicą</p>
             </div>
-            <div class="lg:text-right">
-                <p class="text-xs opacity-70 mb-4">Zapraszamy do wsparcia polskiej kultury i sztuki</p>
-                <p class="text-xs tracking-widest opacity-60">© 2025 FUNDACJA ARTIn. WSZYSTKIE PRAWA ZASTRZEŻONE.</p>
+            <div class="lg:text-right group hover:opacity-80 transition-opacity duration-300">
+                <p class="text-xs opacity-70 mb-4 group-hover:opacity-100 transition-opacity duration-300">Zapraszamy do wsparcia polskiej kultury i sztuki</p>
+                <p class="text-xs tracking-widest opacity-60 group-hover:opacity-100 transition-opacity duration-300">© 2025 FUNDACJA ARTIn. WSZYSTKIE PRAWA ZASTRZEŻONE.</p>
             </div>
         </div>
     </footer>
