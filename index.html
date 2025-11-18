@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" style="scroll-padding-top: 80px;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +19,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Lato', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Lato', sans-serif; font-weight: 900; }
+    </style>
     
     <link rel="stylesheet" href="css/animations.css">
     <link rel="stylesheet" href="css/style.css">
@@ -76,7 +81,25 @@
         </div>
     </nav>
 
-    <main class="pt-40 lg:pt-48">
+    <main>
+        <!-- HERO SECTION - PIANO HANDS -->
+        <section id="home" class="relative w-full h-screen pt-16 overflow-hidden group">
+            <img src="images/piano-hands.jpg" alt="Piano hands - Fundacja ARTIn" class="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500" loading="lazy" />
+            
+            <!-- Overlay z tekstem -->
+            <div class="absolute inset-0 bg-black/30 flex items-end">
+                <div class="px-6 lg:px-12 pb-12 lg:pb-16 max-w-7xl mx-auto w-full animate-fade-in-up">
+                    <span class="text-xs tracking-widest text-white opacity-80 mb-3 block">FUNDACJA ARTIn</span>
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-white leading-tight mb-4">
+                        Wspieranie<br/>polskiej kultury
+                    </h1>
+                    <p class="text-sm md:text-base lg:text-lg text-white opacity-90 max-w-2xl font-light">
+                        Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <!-- MISJA -->
         <section id="misja" class="px-6 lg:px-12 py-12 lg:py-16 border-b border-black animate-fade-in-up">
             <div class="max-w-7xl mx-auto">
@@ -84,20 +107,16 @@
                     <div>
                         <span class="text-xs tracking-widest opacity-60 mb-4 block animate-fade-in inline-block hover:opacity-100 transition-opacity duration-300">NASZA MISJA</span>
                         <h2 class="text-3xl lg:text-5xl font-black leading-tight mb-4 animate-fade-in-up-delay group">
-                            <span class="block group-hover:translate-x-2 transition-transform duration-500">Wspieranie polskiej kultury</span>
+                            <span class="block group-hover:translate-x-2 transition-transform duration-500">Wspieranie i promocja</span>
                         </h2>
                     </div>
                     <div class="flex items-center">
                         <p class="text-sm lg:text-base font-light leading-relaxed animate-fade-in-up-delay-2 hover:opacity-80 transition-opacity duration-300">
-                            Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie. Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
+                            Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
                         </p>
                     </div>
                 </div>
             </div>
-        </section>
-
-        <section class="border-b border-black h-48 lg:h-80 overflow-hidden group">
-            <img src="images/piano-hands.jpg" alt="Piano hands - Misja ARTIn" class="w-full h-full object-cover hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
         </section>
 
         <!-- CO ROBIMY -->
