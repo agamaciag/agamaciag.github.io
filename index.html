@@ -109,25 +109,28 @@
     </nav>
 
     <main>
-        <!-- HERO SECTION - Z ANIMACJĄ OBRAZÓW -->
-        <section id="home" class="relative w-full h-screen pt-16 overflow-hidden group">
-            <!-- Zmieniane obrazy -->
-            <img src="images/piano-hands.jpg" alt="Piano hands" class="hero-image" loading="lazy" />
-            <img src="images/concert-hall.jpg" alt="Concert hall" class="hero-image" loading="lazy" />
-            <img src="images/musicians-group.jpg" alt="Musicians group" class="hero-image" loading="lazy" />
-            
-            <!-- Dark overlay -->
-            <div class="absolute inset-0 bg-black/40"></div>
-            
-            <!-- Text content with semi-transparent background -->
-            <div class="absolute inset-0 flex items-end">
-                <div class="px-6 lg:px-12 pb-12 lg:pb-16 max-w-2xl animate-fade-in-up">
-                    <div class="bg-black/50 backdrop-blur-sm p-8 lg:p-10 rounded-lg">
-                        <span class="text-xs tracking-widest text-white opacity-80 mb-3 block">FUNDACJA ARTIn</span>
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">
+        <!-- HERO SECTION - SIDE BY SIDE LAYOUT -->
+        <section id="home" class="relative w-full h-screen pt-16 overflow-hidden">
+            <div class="flex h-full">
+                <!-- Lewa strona - Zdjęcia -->
+                <div class="w-full lg:w-1/2 h-full relative overflow-hidden group">
+                    <!-- Zmieniane obrazy -->
+                    <img src="images/piano-hands.jpg" alt="Piano hands" class="hero-image" loading="lazy" />
+                    <img src="images/concert-hall.jpg" alt="Concert hall" class="hero-image" loading="lazy" />
+                    <img src="images/musicians-group.jpg" alt="Musicians group" class="hero-image" loading="lazy" />
+                    
+                    <!-- Dark overlay -->
+                    <div class="absolute inset-0 bg-black/20"></div>
+                </div>
+                
+                <!-- Prawa strona - Tekst na białym tle -->
+                <div class="w-full lg:w-1/2 h-full bg-white flex items-center px-6 lg:px-12 border-l border-black">
+                    <div class="max-w-md animate-fade-in-up">
+                        <span class="text-xs tracking-widest text-black opacity-60 mb-4 block">FUNDACJA ARTIn</span>
+                        <h1 class="text-4xl md:text-5xl font-black text-black leading-tight mb-6">
                             Wspieranie polskiej kultury
                         </h1>
-                        <p class="text-sm md:text-base text-white opacity-95 font-light leading-relaxed">
+                        <p class="text-sm lg:text-base text-black opacity-85 font-light leading-relaxed">
                             Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie.
                         </p>
                     </div>
@@ -188,7 +191,7 @@
                                 </p>
                             </div>
                             <div class="h-40 lg:h-48 overflow-hidden rounded-lg hover-zoom-container group-hover:shadow-2xl transition-shadow duration-500">
-                                <img src="images/music-education.jpg" alt="Music education" class="w-full h-full object-cover object-top hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
+                                <img src="images/music-education.jpg" alt="Music education" class="w-full h-full object-cover object-center group-hover:brightness-110 transition-all duration-500" style="object-position: center 30%;" loading="lazy" />
                             </div>
                         </div>
                     </div>
