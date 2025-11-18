@@ -48,10 +48,61 @@
             43% { opacity: 0; }
             100% { opacity: 0; }
         }
+
+        /* Fade in up animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-fade-in-up-delay {
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .animate-fade-in-up-delay-2 {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .animate-fade-in-up-delay-3 {
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Mobile menu animation */
+        #mobile-menu {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        #mobile-menu.hidden {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
+        }
+
+        #mobile-menu:not(.hidden) {
+            opacity: 1;
+        }
+
+        /* Smooth transitions */
+        * {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
     </style>
-    
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-white text-black antialiased">
     <!-- Navigation -->
@@ -96,14 +147,14 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-black animate-slide-down">
+        <div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-black">
             <div class="px-6 py-4 space-y-2">
-                <a href="#misja" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Misja</a>
-                <a href="#codziałamy" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Co robimy</a>
-                <a href="#archiwum" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Archiwum</a>
-                <a href="#onas" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">O nas</a>
-                <a href="#wesprzyj" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Wesprzyj nas</a>
-                <a href="#kontakt" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1">Kontakt</a>
+                <a href="#misja" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">Misja</a>
+                <a href="#codziałamy" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">Co robimy</a>
+                <a href="#archiwum" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">Archiwum</a>
+                <a href="#onas" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">O nas</a>
+                <a href="#wesprzyj" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">Wesprzyj nas</a>
+                <a href="#kontakt" class="block text-sm font-light hover:font-bold transition-all duration-300 hover:translate-x-1 py-2">Kontakt</a>
             </div>
         </div>
     </nav>
@@ -178,7 +229,7 @@
                                 </p>
                             </div>
                             <div class="h-40 lg:h-48 overflow-hidden rounded-lg hover-zoom-container group-hover:shadow-2xl transition-shadow duration-500">
-                                <img src="images/concert-hall.jpg" alt="Sala koncertowa" class="w-full h-full object-cover hover-zoom group-hover:brightness-110 transition-all duration-500" loading="lazy" />
+                                <img src="images/concert-hall.jpg" alt="Sala koncertowa" class="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500" loading="lazy" />
                             </div>
                         </div>
 
@@ -192,7 +243,7 @@
                                 </p>
                             </div>
                             <div class="h-40 lg:h-48 overflow-hidden rounded-lg hover-zoom-container group-hover:shadow-2xl transition-shadow duration-500">
-                                <img src="images/music-education.jpg" alt="Music education" class="w-full h-full object-cover object-center group-hover:brightness-110 transition-all duration-500" style="object-position: center 30%;" loading="lazy" />
+                                <img src="images/music-education.jpg" alt="Music education" class="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500" style="object-position: center 30%;" loading="lazy" />
                             </div>
                         </div>
                     </div>
@@ -458,3 +509,40 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const closeIcon = document.getElementById('close-icon');
+
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mobileMenu.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('hidden');
+                    closeIcon.classList.add('hidden');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
