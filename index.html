@@ -110,30 +110,31 @@
 
     <main>
         <!-- HERO SECTION - SIDE BY SIDE LAYOUT -->
-        <section id="home" class="relative w-full h-screen pt-16 overflow-hidden">
-            <div class="flex h-full">
-                <!-- Lewa strona - Zdjęcia -->
-                <div class="w-full lg:w-1/2 h-full relative overflow-hidden group">
-                    <!-- Zmieniane obrazy -->
-                    <img src="images/piano-hands.jpg" alt="Piano hands" class="hero-image" loading="lazy" />
-                    <img src="images/concert-hall.jpg" alt="Concert hall" class="hero-image" loading="lazy" />
-                    <img src="images/musicians-group.jpg" alt="Musicians group" class="hero-image" loading="lazy" />
-                    
-                    <!-- Dark overlay -->
-                    <div class="absolute inset-0 bg-black/20"></div>
-                </div>
-                
-                <!-- Prawa strona - Tekst na białym tle -->
-                <div class="w-full lg:w-1/2 h-full bg-white flex items-center px-6 lg:px-12 border-l border-black">
+        <section id="home" class="relative border-b border-black">
+            <!-- Desktop: Side by Side | Mobile: Flex Column -->
+            <div class="flex flex-col lg:flex-row lg:h-screen pt-16 lg:pt-0">
+                <!-- Lewa strona - TEKST (30% na desktop) -->
+                <div class="w-full lg:w-3/10 h-auto lg:h-full bg-white flex items-center px-6 lg:px-12 py-12 lg:py-0 border-b lg:border-b-0 lg:border-r border-black">
                     <div class="max-w-md animate-fade-in-up">
                         <span class="text-xs tracking-widest text-black opacity-60 mb-4 block">FUNDACJA ARTIn</span>
-                        <h1 class="text-4xl md:text-5xl font-black text-black leading-tight mb-6">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black text-black leading-tight mb-6">
                             Wspieranie polskiej kultury
                         </h1>
                         <p class="text-sm lg:text-base text-black opacity-85 font-light leading-relaxed">
                             Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie.
                         </p>
                     </div>
+                </div>
+                
+                <!-- Prawa strona - ZDJĘCIA (70% na desktop) -->
+                <div class="w-full lg:w-7/10 h-80 lg:h-full relative overflow-hidden group">
+                    <!-- Zmieniane obrazy -->
+                    <img src="images/piano-hands.jpg" alt="Piano hands" class="hero-image" loading="lazy" />
+                    <img src="images/concert-hall.jpg" alt="Concert hall" class="hero-image" loading="lazy" />
+                    <img src="images/musicians-group.jpg" alt="Musicians group" class="hero-image" loading="lazy" />
+                    
+                    <!-- Dark overlay -->
+                    <div class="absolute inset-0 bg-black/10"></div>
                 </div>
             </div>
         </section>
