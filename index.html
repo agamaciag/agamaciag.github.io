@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIn | Fundacja Kultury i Sztuki</title>
-    <meta name="description" content="Fundacja ARTIn | Wspieranie polskiej kultury">
+    <title>ARTIn - Fundacja Kultury i Sztuki</title>
+    <meta name="description" content="Fundacja ARTIn - Wspieranie polskiej kultury">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,8 +19,8 @@
         }
         
         html {
-            /* Idealne dopasowanie scrollowania */
-            scroll-padding-top: 80px;
+            /* Nowa, bezpieczna wartość scroll-padding dla poprawnego pozycjonowania sekcji pod fixed nav (ok. 96px) */
+            scroll-padding-top: 96px; 
         }
 
         body {
@@ -30,30 +30,26 @@
             overflow-x: hidden;
         }
 
-        /* NAVIGATION */
-        /* Pasek nawigacji z tranzycją tła */
+        /* NAVIGATION BAR STYLES */
         nav {
-            transition: background-color 0.5s ease, border-color 0.5s ease;
+            transition: background-color 0.5s ease;
         }
 
-        /* Elementy wewnątrz nawigacji z efektem odwracania kolorów */
-        .nav-content {
-            mix-blend-mode: difference;
+        /* Klasa dla tekstu na samej górze (White BG) */
+        .nav-text-black {
+            color: var(--text-color) !important;
+            mix-blend-mode: normal !important;
+        }
+        /* Klasa dla tekstu po scrollowaniu (Transparent BG / Contrast) */
+        .nav-text-contrast {
             color: white; 
+            mix-blend-mode: difference;
         }
 
-        /* Klasa dla białego tła na samej górze */
-        .nav-white-bg {
-            background-color: rgba(255, 255, 255, 1);
-            border-bottom: 1px solid transparent;
-        }
+        /* KLASY TŁA */
+        .nav-white-bg { background-color: rgba(255, 255, 255, 1); }
+        .nav-transparent-bg { background-color: rgba(255, 255, 255, 0); }
         
-        /* Klasa dla przezroczystego tła po scrollowaniu */
-        .nav-transparent-bg {
-            background-color: rgba(255, 255, 255, 0);
-            border-bottom: 1px solid transparent; /* Można zmienić na 'black' jeśli chcemy linię */
-        }
-
         /* CUSTOM SCROLLBAR */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #fff; }
@@ -77,10 +73,14 @@
 </head>
 <body class="antialiased">
 
-    <nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-white-bg">
-        <a href="#home" class="text-lg font-light tracking-[0.2em] uppercase nav-content z-50">ARTIn</a>
+    <nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-white-bg border-b border-black">
         
-        <div class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] nav-content">
+        <a href="#home" id="logo-link" class="text-lg font-light tracking-[0.2em] uppercase nav-text-black relative z-50">
+            ARTIn 
+            <span id="logo-separator" class="font-normal mx-2 hidden lg:inline">|</span>
+        </a>
+        
+        <div id="desktop-links" class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] nav-text-black relative z-50">
             <a href="#misja" class="hover:underline decoration-1 underline-offset-8">Misja</a>
             <a href="#codzialamy" class="hover:underline decoration-1 underline-offset-8">Działania</a>
             <a href="#archiwum" class="hover:underline decoration-1 underline-offset-8">Archiwum</a>
@@ -88,7 +88,7 @@
             <a href="#kontakt" class="hover:underline decoration-1 underline-offset-8">Kontakt</a>
         </div>
 
-        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest nav-content z-50">Menu</button>
+        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest nav-text-black relative z-50">Menu</button>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden flex-col justify-center items-center space-y-8 text-3xl font-light uppercase tracking-widest text-black">
@@ -317,7 +317,7 @@
     </main>
 
     <script>
-        // Mobile Menu Logic
+        // MOBILE MENU LOGIC
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-menu');
         const menu = document.getElementById('mobile-menu');
@@ -340,23 +340,48 @@
         closeBtn.addEventListener('click', toggleMenu);
         links.forEach(link => link.addEventListener('click', toggleMenu));
 
-        // NAVBAR SCROLL LOGIC (White BG on top, Transparent on scroll)
+
+        // NAVBAR SCROLL & CONTRAST LOGIC
         const navbar = document.getElementById('navbar');
+        const logoLink = document.getElementById('logo-link');
+        const desktopLinks = document.getElementById('desktop-links');
+        const menuButton = document.getElementById('menu-btn');
+        const logoSeparator = document.getElementById('logo-separator');
         
         function updateNavbar() {
-            if (window.scrollY <= 5) {
-                // Na samej górze - białe tło
-                navbar.classList.add('nav-white-bg');
-                navbar.classList.remove('nav-transparent-bg');
+            const isTop = window.scrollY <= 10;
+            const textElements = [logoLink, desktopLinks, menuButton];
+
+            if (isTop) {
+                // STAN 1: NA GÓRZE (White BG, Black Text)
+                navbar.classList.add('nav-white-bg', 'border-black');
+                navbar.classList.remove('nav-transparent-bg', 'border-transparent');
+
+                textElements.forEach(el => {
+                    if(el) { // Check if element exists before manipulating classes
+                        el.classList.add('nav-text-black');
+                        el.classList.remove('nav-text-contrast');
+                    }
+                });
+                if(logoSeparator) logoSeparator.classList.remove('hidden');
+
             } else {
-                // Podczas scrollowania - przezroczyste
-                navbar.classList.add('nav-transparent-bg');
-                navbar.classList.remove('nav-white-bg');
+                // STAN 2: PRZESCROLLOWANY (Transparent BG, Contrast Text)
+                navbar.classList.add('nav-transparent-bg', 'border-transparent');
+                navbar.classList.remove('nav-white-bg', 'border-black');
+
+                textElements.forEach(el => {
+                    if(el) {
+                        el.classList.add('nav-text-contrast');
+                        el.classList.remove('nav-text-black');
+                    }
+                });
+                if(logoSeparator) logoSeparator.classList.add('hidden'); // Ukrywamy | w trybie kontrastowym
             }
         }
 
         window.addEventListener('scroll', updateNavbar);
-        // Wywołanie na start
+        // Uruchomienie na start, aby ustawić początkowy stan
         updateNavbar();
     </script>
 </body>
