@@ -19,7 +19,7 @@
         }
         
         html {
-            /* Zmniejszony odstęp - bardziej naturalny */
+            /* Idealne dopasowanie scrollowania */
             scroll-padding-top: 80px;
         }
 
@@ -30,16 +30,28 @@
             overflow-x: hidden;
         }
 
-        /* UTILITIES */
-        .text-justify-flush {
-            text-align: justify;
-            text-justify: inter-word;
+        /* NAVIGATION */
+        /* Pasek nawigacji z tranzycją tła */
+        nav {
+            transition: background-color 0.5s ease, border-color 0.5s ease;
         }
 
-        /* NAVIGATION BLEND MODE */
-        .nav-blend {
+        /* Elementy wewnątrz nawigacji z efektem odwracania kolorów */
+        .nav-content {
             mix-blend-mode: difference;
             color: white; 
+        }
+
+        /* Klasa dla białego tła na samej górze */
+        .nav-white-bg {
+            background-color: rgba(255, 255, 255, 1);
+            border-bottom: 1px solid transparent;
+        }
+        
+        /* Klasa dla przezroczystego tła po scrollowaniu */
+        .nav-transparent-bg {
+            background-color: rgba(255, 255, 255, 0);
+            border-bottom: 1px solid transparent; /* Można zmienić na 'black' jeśli chcemy linię */
         }
 
         /* CUSTOM SCROLLBAR */
@@ -65,10 +77,10 @@
 </head>
 <body class="antialiased">
 
-    <nav class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-blend pointer-events-none border-b border-transparent">
-        <a href="#home" class="text-lg font-light tracking-[0.2em] uppercase pointer-events-auto">ARTIn</a>
+    <nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-white-bg">
+        <a href="#home" class="text-lg font-light tracking-[0.2em] uppercase nav-content z-50">ARTIn</a>
         
-        <div class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] pointer-events-auto">
+        <div class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] nav-content">
             <a href="#misja" class="hover:underline decoration-1 underline-offset-8">Misja</a>
             <a href="#codzialamy" class="hover:underline decoration-1 underline-offset-8">Działania</a>
             <a href="#archiwum" class="hover:underline decoration-1 underline-offset-8">Archiwum</a>
@@ -76,7 +88,7 @@
             <a href="#kontakt" class="hover:underline decoration-1 underline-offset-8">Kontakt</a>
         </div>
 
-        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest pointer-events-auto">Menu</button>
+        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest nav-content z-50">Menu</button>
     </nav>
 
     <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden flex-col justify-center items-center space-y-8 text-3xl font-light uppercase tracking-widest text-black">
@@ -112,7 +124,7 @@
 
         <section id="misja" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row min-h-[60vh]">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white transition-all">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 flex flex-row lg:flex-col justify-between items-baseline bg-white">
                     <span class="text-xs uppercase tracking-[0.2em] text-gray-400">01</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Misja</h2>
                 </div>
@@ -127,7 +139,7 @@
 
         <section id="codzialamy" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 flex flex-row lg:flex-col justify-between items-baseline bg-white">
                     <span class="text-xs uppercase tracking-[0.2em] text-gray-400">02</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Działania</h2>
                 </div>
@@ -179,7 +191,7 @@
 
         <section id="archiwum" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 flex flex-row lg:flex-col justify-between items-baseline bg-white">
                     <span class="text-xs uppercase tracking-[0.2em] text-gray-400">03</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Projekty</h2>
                 </div>
@@ -305,6 +317,7 @@
     </main>
 
     <script>
+        // Mobile Menu Logic
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-menu');
         const menu = document.getElementById('mobile-menu');
@@ -326,6 +339,25 @@
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
         links.forEach(link => link.addEventListener('click', toggleMenu));
+
+        // NAVBAR SCROLL LOGIC (White BG on top, Transparent on scroll)
+        const navbar = document.getElementById('navbar');
+        
+        function updateNavbar() {
+            if (window.scrollY <= 5) {
+                // Na samej górze - białe tło
+                navbar.classList.add('nav-white-bg');
+                navbar.classList.remove('nav-transparent-bg');
+            } else {
+                // Podczas scrollowania - przezroczyste
+                navbar.classList.add('nav-transparent-bg');
+                navbar.classList.remove('nav-white-bg');
+            }
+        }
+
+        window.addEventListener('scroll', updateNavbar);
+        // Wywołanie na start
+        updateNavbar();
     </script>
 </body>
 </html>
