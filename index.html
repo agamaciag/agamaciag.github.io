@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIn - Fundacja Kultury i Sztuki</title>
-    <meta name="description" content="Fundacja ARTIn - Wspieranie polskiej kultury">
+    <title>ARTIn | Fundacja Kultury i Sztuki</title>
+    <meta name="description" content="Fundacja ARTIn | Wspieranie polskiej kultury">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,7 +19,7 @@
         }
         
         html {
-            /* Nowa, bezpieczna wartość scroll-padding dla poprawnego pozycjonowania sekcji pod fixed nav (ok. 96px) */
+            /* Bezpieczny padding dla prawidłowego skrolowania pod fixed nav */
             scroll-padding-top: 96px; 
         }
 
@@ -35,26 +35,10 @@
             transition: background-color 0.5s ease;
         }
 
-        /* Klasa dla tekstu na samej górze (White BG) */
-        .nav-text-black {
-            color: var(--text-color) !important;
-            mix-blend-mode: normal !important;
-        }
-        /* Klasa dla tekstu po scrollowaniu (Transparent BG / Contrast) */
-        .nav-text-contrast {
-            color: white; 
-            mix-blend-mode: difference;
-        }
-
         /* KLASY TŁA */
         .nav-white-bg { background-color: rgba(255, 255, 255, 1); }
         .nav-transparent-bg { background-color: rgba(255, 255, 255, 0); }
         
-        /* CUSTOM SCROLLBAR */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #fff; }
-        ::-webkit-scrollbar-thumb { background: #000; }
-
         /* HOVER INVERSION EFFECT */
         .hover-invert { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         .hover-invert:hover { background-color: #000; color: #fff; }
@@ -75,12 +59,11 @@
 
     <nav id="navbar" class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-white-bg border-b border-black">
         
-        <a href="#home" id="logo-link" class="text-lg font-light tracking-[0.2em] uppercase nav-text-black relative z-50">
-            ARTIn 
-            <span id="logo-separator" class="font-normal mx-2 hidden lg:inline">|</span>
+        <a href="#home" id="logo-link" class="text-lg font-light tracking-[0.2em] uppercase text-black relative z-50 transition-colors duration-500">
+            ARTIn
         </a>
         
-        <div id="desktop-links" class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] nav-text-black relative z-50">
+        <div id="desktop-links" class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] relative z-50 transition-colors duration-500 text-black">
             <a href="#misja" class="hover:underline decoration-1 underline-offset-8">Misja</a>
             <a href="#codzialamy" class="hover:underline decoration-1 underline-offset-8">Działania</a>
             <a href="#archiwum" class="hover:underline decoration-1 underline-offset-8">Archiwum</a>
@@ -88,10 +71,10 @@
             <a href="#kontakt" class="hover:underline decoration-1 underline-offset-8">Kontakt</a>
         </div>
 
-        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest nav-text-black relative z-50">Menu</button>
+        <button id="menu-btn" class="lg:hidden text-sm uppercase tracking-widest text-black relative z-50 transition-colors duration-500">Menu</button>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden flex-col justify-center items-center space-y-8 text-3xl font-light uppercase tracking-widest text-black">
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-60 hidden flex-col justify-center items-center space-y-8 text-3xl font-light uppercase tracking-widest text-black">
         <a href="#misja" class="mobile-link hover:opacity-50 transition-opacity">Misja</a>
         <a href="#codzialamy" class="mobile-link hover:opacity-50 transition-opacity">Działania</a>
         <a href="#archiwum" class="mobile-link hover:opacity-50 transition-opacity">Archiwum</a>
@@ -305,7 +288,6 @@
                     <div class="mb-8 lg:mb-0 space-y-2">
                         <p class="opacity-40 mb-4">Kontakt bezpośredni</p>
                         <a href="mailto:ArtInFoundation@gmail.com" class="block hover:text-gray-400 transition-colors">ArtInFoundation@gmail.com</a>
-                        <a href="mailto:marzena@mikosz.net" class="block hover:text-gray-400 transition-colors">marzena@mikosz.net</a>
                     </div>
                     <div class="text-right space-y-2">
                         <p class="opacity-40">&copy; 2025 Fundacja ARTIn</p>
@@ -320,37 +302,49 @@
         // MOBILE MENU LOGIC
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-menu');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelectorAll('.mobile-link');
 
         function toggleMenu() {
-            const isHidden = menu.classList.contains('hidden');
+            const isHidden = mobileMenu.classList.contains('hidden');
             if (isHidden) {
-                menu.classList.remove('hidden');
-                menu.classList.add('flex');
+                // Otwieranie: ukryj główny pasek nawigacji, pokaż menu
+                document.getElementById('navbar').classList.add('hidden');
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
                 document.body.style.overflow = 'hidden';
             } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('flex');
+                // Zamykanie: pokaż główny pasek nawigacji, ukryj menu
+                document.getElementById('navbar').classList.remove('hidden');
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
                 document.body.style.overflow = 'auto';
             }
         }
 
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
-        links.forEach(link => link.addEventListener('click', toggleMenu));
+        // Po kliknięciu linka w menu mobilnym, zamykamy menu
+        navLinks.forEach(link => link.addEventListener('click', () => {
+            setTimeout(() => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMenu(); 
+                }
+            }, 50);
+        }));
 
 
-        // NAVBAR SCROLL & CONTRAST LOGIC
+        // NAVBAR SCROLL & CONTRAST LOGIC 
         const navbar = document.getElementById('navbar');
-        const logoLink = document.getElementById('logo-link');
-        const desktopLinks = document.getElementById('desktop-links');
-        const menuButton = document.getElementById('menu-btn');
-        const logoSeparator = document.getElementById('logo-separator');
+        const textElements = document.querySelectorAll('#logo-link, #desktop-links a, #menu-btn');
         
         function updateNavbar() {
             const isTop = window.scrollY <= 10;
-            const textElements = [logoLink, desktopLinks, menuButton];
+            const isMenuOpen = !mobileMenu.classList.contains('hidden');
+
+            if (isMenuOpen) {
+                return;
+            }
 
             if (isTop) {
                 // STAN 1: NA GÓRZE (White BG, Black Text)
@@ -358,25 +352,18 @@
                 navbar.classList.remove('nav-transparent-bg', 'border-transparent');
 
                 textElements.forEach(el => {
-                    if(el) { // Check if element exists before manipulating classes
-                        el.classList.add('nav-text-black');
-                        el.classList.remove('nav-text-contrast');
-                    }
+                    el.classList.add('text-black');
+                    el.classList.remove('text-white');
                 });
-                if(logoSeparator) logoSeparator.classList.remove('hidden');
 
             } else {
-                // STAN 2: PRZESCROLLOWANY (Transparent BG, Contrast Text)
                 navbar.classList.add('nav-transparent-bg', 'border-transparent');
                 navbar.classList.remove('nav-white-bg', 'border-black');
 
                 textElements.forEach(el => {
-                    if(el) {
-                        el.classList.add('nav-text-contrast');
-                        el.classList.remove('nav-text-black');
-                    }
+                    el.classList.add('text-white');
+                    el.classList.remove('text-black');
                 });
-                if(logoSeparator) logoSeparator.classList.add('hidden'); // Ukrywamy | w trybie kontrastowym
             }
         }
 
