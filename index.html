@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
     
     <style>
         /* CORE AESTHETICS */
@@ -19,7 +19,8 @@
         }
         
         html {
-            scroll-padding-top: 90px;
+            /* Zmniejszony odstęp - bardziej naturalny */
+            scroll-padding-top: 80px;
         }
 
         body {
@@ -35,13 +36,13 @@
             text-justify: inter-word;
         }
 
-        /* NAVIGATION MIX BLEND */
+        /* NAVIGATION BLEND MODE */
         .nav-blend {
             mix-blend-mode: difference;
             color: white; 
         }
 
-        /* CUSTOM SCROLLBAR (Subtelny) */
+        /* CUSTOM SCROLLBAR */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #fff; }
         ::-webkit-scrollbar-thumb { background: #000; }
@@ -51,13 +52,20 @@
         .hover-invert:hover { background-color: #000; color: #fff; }
         .hover-invert:hover .border-black { border-color: #fff; }
         .hover-invert:hover .opacity-50 { opacity: 0.8; }
-        .hover-invert:hover .text-gray-600 { color: #ccc; }
-
+        
+        /* IMAGE STYLES */
+        .art-img {
+            filter: grayscale(100%) contrast(110%);
+            transition: filter 0.7s ease;
+        }
+        .group:hover .art-img {
+            filter: grayscale(0%) contrast(100%);
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <nav class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-blend pointer-events-none">
+    <nav class="fixed inset-x-0 top-0 z-50 px-6 py-5 flex justify-between items-center nav-blend pointer-events-none border-b border-transparent">
         <a href="#home" class="text-lg font-light tracking-[0.2em] uppercase pointer-events-auto">ARTIn</a>
         
         <div class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em] pointer-events-auto">
@@ -89,13 +97,13 @@
             <div class="absolute inset-0 grid grid-cols-1 lg:grid-cols-2 pointer-events-none">
                 <div class="border-r border-white/10 hidden lg:block"></div>
                 <div class="flex flex-col justify-end p-6 lg:p-12">
-                    <div class="bg-white/95 backdrop-blur-sm p-8 lg:p-12 border border-black pointer-events-auto max-w-xl">
+                    <div class="bg-white/95 backdrop-blur-sm p-8 lg:p-12 border border-black pointer-events-auto max-w-xl text-left">
                         <h1 class="text-4xl lg:text-6xl font-light leading-[0.9] mb-6 uppercase tracking-tight">
                             Wspieranie<br>Kultury
                         </h1>
-                        <p class="text-xs lg:text-sm font-light leading-relaxed text-justify text-gray-800 uppercase tracking-wide">
+                        <p class="text-xs lg:text-sm font-light leading-relaxed text-gray-800 uppercase tracking-wide text-left">
                             Fundacja ARTIn.<br>
-                            Budowanie pomostów międzykulturowych poprzez muzykę, sztukę i edukację.
+                            Budowanie pomostów międzykulturowych poprzez muzykę, sztukę i edukację w Polsce i na świecie.
                         </p>
                     </div>
                 </div>
@@ -104,13 +112,13 @@
 
         <section id="misja" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row min-h-[60vh]">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-0 h-auto lg:h-screen flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
-                    <span class="text-xs uppercase tracking-[0.2em]">01</span>
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white transition-all">
+                    <span class="text-xs uppercase tracking-[0.2em] text-gray-400">01</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Misja</h2>
                 </div>
 
                 <div class="w-full lg:w-3/4 flex items-center p-6 lg:p-24">
-                    <p class="text-xl lg:text-4xl font-light leading-tight indent-8 lg:indent-16 text-justify-flush max-w-4xl">
+                    <p class="text-xl lg:text-3xl font-light leading-relaxed text-left max-w-4xl">
                         Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie. Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
                     </p>
                 </div>
@@ -119,8 +127,8 @@
 
         <section id="codzialamy" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-0 h-auto lg:h-screen flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
-                    <span class="text-xs uppercase tracking-[0.2em]">02</span>
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
+                    <span class="text-xs uppercase tracking-[0.2em] text-gray-400">02</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Działania</h2>
                 </div>
 
@@ -171,26 +179,24 @@
 
         <section id="archiwum" class="relative border-b border-black bg-white">
             <div class="flex flex-col lg:flex-row">
-                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-0 h-auto lg:h-screen flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
-                    <span class="text-xs uppercase tracking-[0.2em]">03</span>
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 lg:sticky lg:top-24 h-auto lg:h-fit flex flex-row lg:flex-col justify-between items-baseline z-10 bg-white">
+                    <span class="text-xs uppercase tracking-[0.2em] text-gray-400">03</span>
                     <h2 class="text-2xl lg:text-4xl uppercase font-light mt-0 lg:mt-4">Projekty</h2>
                 </div>
 
                 <div class="w-full lg:w-3/4">
-                    
                     <div class="group border-b border-black">
                         <div class="grid lg:grid-cols-12 h-full">
                             <div class="lg:col-span-5 border-b lg:border-b-0 lg:border-r border-black h-64 lg:h-auto overflow-hidden relative">
-                                <img src="images/paddy.jpg" alt="Ignacy Jan Paderewski" class="w-full h-full object-cover art-img absolute inset-0">
+                                <img src="images/paddy.jpg" alt="Paderewski" class="w-full h-full object-cover art-img absolute inset-0">
                             </div>
-                            
                             <div class="lg:col-span-7 p-6 lg:p-10 flex flex-col justify-between group-hover:bg-black group-hover:text-white transition-colors duration-500">
                                 <div>
                                     <div class="flex justify-between items-start mb-6">
                                         <h3 class="text-2xl lg:text-3xl font-light uppercase leading-tight">Festiwal<br>Paderewskiego</h3>
                                         <span class="text-xs border border-current px-2 py-1 uppercase tracking-widest">Morges</span>
                                     </div>
-                                    <p class="text-sm lg:text-base font-light leading-relaxed text-justify mb-8 opacity-90">
+                                    <p class="text-sm lg:text-base font-light leading-relaxed text-left mb-8 opacity-90">
                                         Wspieranie i organizacja Festiwalu Paderewskiego w Morges, celebrującego spuściznę wielkiego polskiego kompozytora i pianisty Ignacego Jana Paderewskiego.
                                     </p>
                                 </div>
@@ -211,21 +217,19 @@
                                 <h3 class="text-2xl lg:text-3xl font-light uppercase leading-tight">Koncert na rzecz<br>powodzian</h3>
                                 <span class="text-xs border border-black group-hover:border-white px-2 py-1 uppercase tracking-widest">Solidaritätskonzert</span>
                             </div>
-
                             <div class="grid lg:grid-cols-12 gap-8 mt-4">
                                 <div class="lg:col-span-5 text-sm lg:text-base font-light leading-relaxed opacity-90">
                                     Koncert charytatywny w Szwajcarii. Zebrana suma 6 400 CHF przekazana mieszkańcom gminy Wleń.
                                 </div>
                                 <div class="lg:col-span-7">
                                     <p class="text-xs uppercase tracking-widest mb-3 opacity-50">Artyści</p>
-                                    <div class="text-sm lg:text-lg font-light leading-snug uppercase text-justify">
+                                    <div class="text-sm lg:text-lg font-light leading-snug uppercase text-left">
                                         Bartłomiej Nizoł / Paweł Mazurkiewicz / Maciej Burdzy / Dominik Dołęga / Anna Środecka / Tomasz Domański / Lidia Vodyk / Wojciech Chmielewski / Aleksandra Jopek / Paulina Tomczuk
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -234,16 +238,29 @@
             <div class="grid lg:grid-cols-2">
                 <div class="border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-16 hover-invert transition-all duration-500">
                     <h3 class="text-2xl uppercase mb-6 font-light tracking-wide">Barbara Maciąg</h3>
-                    <p class="text-sm font-light leading-relaxed text-justify opacity-90">
+                    <p class="text-sm font-light leading-relaxed text-left opacity-90">
                         Współzałożycielka Fundacji ARTIn, zaangażowana w promocję polskiej kultury i sztuki zarówno w kraju jak i poza jego granicami.
                     </p>
                 </div>
+                
                 <div class="p-6 lg:p-16 hover-invert transition-all duration-500">
                     <h3 class="text-2xl uppercase mb-6 font-light tracking-wide">Marzena Mikosz</h3>
-                    <p class="text-xs uppercase tracking-widest mb-4 opacity-60">Producentka / Event Manager</p>
-                    <div class="text-sm font-light leading-relaxed space-y-4 text-justify opacity-90">
-                        <p>Absolwentka archeologii i zarządzania marketingowego. Od ponad 20 lat zajmuje się promocją polskiej kultury. Jako rzecznik prasowy festiwalu Pieśń Naszych Korzeni i Baltic Opera Festival współpracowała z BBC Radio 3, MDR Klassik, Limelight Magazine.</p>
-                        <p>Nadzorowała pracę zespołów składających się od kilku do kilkudziesięciu osób. Projekty, które koordynowała zdobywały liczne nagrody: International Classical Music Awards, Gramophone Award.</p>
+                    <p class="text-xs uppercase tracking-widest mb-6 opacity-60 font-medium">
+                        Producentka / Event Manager / Animatorka / Promotorka kultury
+                    </p>
+                    <div class="text-sm font-light leading-relaxed space-y-4 text-left opacity-90">
+                        <p>
+                            Jest absolwentką archeologii i zarządzania marketingowego. Od ponad 20 lat zajmuje się promocją polskiej kultury na terenie Polski i poza granicami.
+                        </p>
+                        <p>
+                            Jako rzecznik prasowy festiwalu Pieśń Naszych Korzeni w Jarosławiu i Baltic Opera Festival opracowywała materiały prasowe, koordynowała pracę biura oraz współpracowała z dziennikarzami mediów lokalnych, ogólnopolskich i światowych, w tym: BBC Radio 3, MDR Klassik, Limelight Magazine, Times UK.
+                        </p>
+                        <p>
+                            Nadzorowała pracę zespołów składających się od kilku do kilkudziesięciu osób. Na stałe współpracuje z portalami Legalna Kultura i Polish Opera Now, dla których przeprowadza wywiady i pisze felietony.
+                        </p>
+                        <p class="pt-2 border-t border-current opacity-80 italic">
+                            Projekty, które koordynowała od strony organizacyjnej zdobywały liczne nagrody: International Classical Music Awards, Gramophone Award, Nagroda Specjalna Polskiego Instytutu Sztuki Filmowej, MocArt Radia RMF Classic czy nominacje, w tym do polskiej nagrody muzycznej Fryderyki.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -276,10 +293,10 @@
                     <div class="mb-8 lg:mb-0 space-y-2">
                         <p class="opacity-40 mb-4">Kontakt bezpośredni</p>
                         <a href="mailto:ArtInFoundation@gmail.com" class="block hover:text-gray-400 transition-colors">ArtInFoundation@gmail.com</a>
+                        <a href="mailto:marzena@mikosz.net" class="block hover:text-gray-400 transition-colors">marzena@mikosz.net</a>
                     </div>
                     <div class="text-right space-y-2">
                         <p class="opacity-40">&copy; 2025 Fundacja ARTIn</p>
-                        <p class="opacity-20">Design: Brutalist/Minimal</p>
                     </div>
                 </footer>
             </div>
@@ -288,7 +305,6 @@
     </main>
 
     <script>
-        // Mobile Menu Logic
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-menu');
         const menu = document.getElementById('mobile-menu');
@@ -299,20 +315,17 @@
             if (isHidden) {
                 menu.classList.remove('hidden');
                 menu.classList.add('flex');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                document.body.style.overflow = 'hidden';
             } else {
                 menu.classList.add('hidden');
                 menu.classList.remove('flex');
-                document.body.style.overflow = 'auto'; // Enable scrolling
+                document.body.style.overflow = 'auto';
             }
         }
 
         menuBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
-        
-        links.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
+        links.forEach(link => link.addEventListener('click', toggleMenu));
     </script>
 </body>
 </html>
