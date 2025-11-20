@@ -3,393 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fundacja ARTIn - wspieranie i promowanie polskiej kultury w Polsce i na świecie">
     <title>ARTIn - Fundacja Kultury i Sztuki</title>
-    
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+    <meta name="description" content="Fundacja ARTIn">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
     
     <style>
-        /* BASE STYLES - PRADA/LV AESTHETIC */
+        /* CORE AESTHETICS */
         :root {
+            --line-color: rgba(0,0,0,1);
             --bg-color: #ffffff;
-            --text-color: #1a1a1a;
-            --line-color: #e5e5e5;
         }
-
-        * { font-family: 'Inter', sans-serif; }
         
         body {
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            color: var(--text-color);
-            font-weight: 300; /* Light by default */
+            color: #000;
+            overflow-x: hidden;
         }
 
-        /* REMOVING BOLDS - Custom Utility */
-        .font-art { font-weight: 300; }
-        .font-art-thin { font-weight: 200; }
-        
-        /* CUSTOM CURSOR */
-        body { cursor: default; }
-        a, button { cursor: pointer; }
+        /* UTILITIES */
+        .text-justify-flush {
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        /* NAVIGATION BLUR & MIX BLEND */
+        .nav-item {
+            mix-blend-mode: difference;
+            color: #fff; /* Will appear black on white, white on black due to mix-blend */
+        }
 
         /* HERO ANIMATION */
-        .hero-image {
+        .hero-img {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            inset: 0;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 2s ease-in-out;
+            transition: opacity 1.5s ease-in-out;
+            filter: grayscale(100%); /* Artistic choice: Black & White photos */
         }
-        .hero-image.active { opacity: 1; }
+        .hero-img.active { opacity: 1; }
 
-        /* MARQUEE ANIMATION (Optional artistic touch) */
-        .marquee-container { overflow: hidden; white-space: nowrap; }
-        .marquee-content { display: inline-block; animation: marquee 20s linear infinite; }
-        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* FADE UP UTILS */
-        .fade-up { opacity: 0; transform: translateY(20px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-        
-        /* HOVER UNDERLINE ANIMATION */
-        .hover-line { position: relative; display: inline-block; }
-        .hover-line::after {
-            content: ''; position: absolute; width: 0; height: 1px;
-            bottom: -2px; left: 0; background-color: currentColor;
-            transition: width 0.3s ease;
+        /* MARQUEE / TICKER */
+        .ticker-wrap {
+            overflow: hidden;
+            white-space: nowrap;
         }
-        .hover-line:hover::after { width: 100%; }
+        .ticker {
+            display: inline-block;
+            animation: ticker 30s linear infinite;
+        }
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
 
-        /* MENU MOBILE */
-        #mobile-menu {
-            transition: opacity 0.3s ease, visibility 0.3s;
+        /* STICKY LAYOUT UTILS */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid black;
+        }
+
+        /* HOVER INVERSION EFFECT */
+        .hover-invert {
+            transition: all 0.3s ease;
+        }
+        .hover-invert:hover {
+            background-color: #000;
+            color: #fff;
+        }
+        .hover-invert:hover .border-black {
+            border-color: #fff;
+        }
+        .hover-invert:hover .text-gray-500 {
+            color: #aaa;
         }
     </style>
 </head>
-<body class="antialiased selection:bg-gray-200 selection:text-black">
+<body class="text-black">
 
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-100 transition-all duration-300" id="navbar">
-        <div class="flex justify-between items-center px-6 py-4 lg:px-10 lg:py-5">
-            <a href="#home" class="z-50 mix-blend-difference">
-                <h1 class="text-2xl lg:text-3xl font-normal tracking-tight hover:opacity-50 transition-opacity">ARTIn</h1>
-            </a>
-
-            <div class="hidden lg:flex items-center space-x-8 text-sm font-light tracking-wide">
-                <a href="#misja" class="hover-line opacity-60 hover:opacity-100 transition-opacity">Misja</a>
-                <a href="#codzialamy" class="hover-line opacity-60 hover:opacity-100 transition-opacity">Działania</a>
-                <a href="#archiwum" class="hover-line opacity-60 hover:opacity-100 transition-opacity">Archiwum</a>
-                <a href="#onas" class="hover-line opacity-60 hover:opacity-100 transition-opacity">O nas</a>
-                <a href="#wesprzyj" class="hover-line opacity-60 hover:opacity-100 transition-opacity">Wsparcie</a>
-                <a href="#kontakt" class="border border-black px-4 py-1 hover:bg-black hover:text-white transition-colors text-xs uppercase tracking-widest">Kontakt</a>
-            </div>
-
-            <button id="menu-toggle" class="lg:hidden z-50 p-2">
-                <div class="w-6 h-px bg-black mb-1.5 transition-all" id="bar1"></div>
-                <div class="w-6 h-px bg-black transition-all" id="bar2"></div>
-            </button>
+    <nav class="fixed inset-x-0 top-0 z-50 px-4 py-3 flex justify-between items-start mix-blend-difference text-white">
+        <a href="#home" class="text-lg uppercase tracking-widest font-light">ARTIn</a>
+        
+        <div class="hidden lg:flex space-x-12 text-xs uppercase tracking-[0.2em]">
+            <a href="#misja" class="hover:underline decoration-1 underline-offset-4">Misja</a>
+            <a href="#codzialamy" class="hover:underline decoration-1 underline-offset-4">Działania</a>
+            <a href="#archiwum" class="hover:underline decoration-1 underline-offset-4">Archiwum</a>
+            <a href="#onas" class="hover:underline decoration-1 underline-offset-4">O nas</a>
+            <a href="#kontakt" class="hover:underline decoration-1 underline-offset-4">Kontakt</a>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-white z-40 opacity-0 invisible flex items-center justify-center">
-            <div class="flex flex-col items-center space-y-8 text-2xl font-light">
-                <a href="#misja" class="mobile-link">Misja</a>
-                <a href="#codzialamy" class="mobile-link">Działania</a>
-                <a href="#archiwum" class="mobile-link">Archiwum</a>
-                <a href="#onas" class="mobile-link">O nas</a>
-                <a href="#wesprzyj" class="mobile-link">Wsparcie</a>
-                <a href="#kontakt" class="mobile-link">Kontakt</a>
-            </div>
-        </div>
+        <button id="menu-btn" class="lg:hidden text-sm uppercase">Menu</button>
     </nav>
 
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 hidden flex-col justify-center items-center space-y-8 text-2xl font-light uppercase tracking-widest">
+        <a href="#misja" class="mobile-link">Misja</a>
+        <a href="#codzialamy" class="mobile-link">Działania</a>
+        <a href="#archiwum" class="mobile-link">Archiwum</a>
+        <a href="#onas" class="mobile-link">O nas</a>
+        <a href="#kontakt" class="mobile-link">Kontakt</a>
+        <button id="close-menu" class="absolute top-4 right-4 text-sm">Zamknij</button>
+    </div>
+
     <main>
-        <section id="home" class="relative h-screen w-full overflow-hidden">
-            <div class="absolute inset-0 z-0 grayscale hover:grayscale-0 transition-all duration-1000">
-                <img src="images/piano-hands.jpg" class="hero-image active" alt="Piano">
-                <img src="images/concert-hall.jpg" class="hero-image" alt="Hall">
-                <img src="images/musicians-group.jpg" class="hero-image" alt="Group">
+        <section id="home" class="relative h-screen w-full border-b border-black overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="images/piano-hands.jpg" class="hero-img active" alt="Background">
+                <img src="images/concert-hall.jpg" class="hero-img" alt="Background">
+                <img src="images/musicians-group.jpg" class="hero-img" alt="Background">
             </div>
             
-            <div class="absolute bottom-0 left-0 p-6 lg:p-10 z-10 max-w-2xl">
-                <div class="bg-white/90 backdrop-blur p-6 lg:p-8 fade-up visible">
-                    <h2 class="text-3xl lg:text-5xl font-light leading-tight mb-4 tracking-tight">
-                        Wspieranie kultury<br>w Polsce i na świecie.
-                    </h2>
-                    <p class="text-sm font-light opacity-70 max-w-md leading-relaxed">
-                        Fundacja ARTIn buduje pomosty międzykulturowe poprzez muzykę, sztukę i edukację.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="misja" class="px-6 py-24 lg:px-10 lg:py-32 max-w-screen-2xl mx-auto">
-            <div class="grid lg:grid-cols-12 gap-12 items-start">
-                <div class="lg:col-span-4 fade-up">
-                    <span class="text-xs uppercase tracking-[0.2em] opacity-40 block mb-4">Statement</span>
-                    <h2 class="text-4xl lg:text-6xl font-art-thin tracking-tight leading-none">Misja</h2>
-                </div>
-                <div class="lg:col-span-8 lg:pl-12 lg:border-l border-gray-100 fade-up">
-                    <p class="text-xl lg:text-3xl font-art-thin leading-relaxed text-gray-800">
-                        Wspieranie i promowanie kultury w jej różnorodnych odcieniach.
-                    </p>
-                    <p class="mt-8 text-sm lg:text-base text-gray-500 font-light leading-relaxed max-w-2xl">
-                        Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="codzialamy" class="border-t border-gray-100 bg-[#fafafa]">
-            <div class="px-6 py-24 lg:px-10 lg:py-32 max-w-screen-2xl mx-auto">
-                <div class="mb-16 fade-up">
-                    <span class="text-xs uppercase tracking-[0.2em] opacity-40 block mb-4">Działania</span>
-                    <h2 class="text-4xl lg:text-5xl font-art-thin tracking-tight">Co robimy</h2>
-                </div>
-
-                <div class="grid lg:grid-cols-3 gap-x-12 gap-y-16">
-                    <div class="group cursor-default fade-up">
-                        <span class="text-xs text-gray-400 block mb-4 border-b border-gray-200 pb-2 w-12 group-hover:w-full transition-all duration-700">01</span>
-                        <h3 class="text-2xl font-light mb-3">Koncerty</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">
-                            Organizujemy koncerty i wydarzenia muzyczne promujące polskich kompozytorów i wykonawców zarówno w kraju jak i za granicą.
-                        </p>
-                    </div>
-
-                    <div class="group cursor-default fade-up">
-                        <span class="text-xs text-gray-400 block mb-4 border-b border-gray-200 pb-2 w-12 group-hover:w-full transition-all duration-700">02</span>
-                        <h3 class="text-2xl font-light mb-3">Festiwale</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">
-                            Wspieramy i organizujemy festiwale, które łączą artystów, publiczność i kulturę w wyjątkowe doświadczenia.
-                        </p>
-                    </div>
-
-                    <div class="group cursor-default fade-up">
-                        <span class="text-xs text-gray-400 block mb-4 border-b border-gray-200 pb-2 w-12 group-hover:w-full transition-all duration-700">03</span>
-                        <h3 class="text-2xl font-light mb-3">Wystawy</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">
-                            Organizujemy wystawy sztuki współczesnej i tradycyjnej, tworząc przestrzenie dialogu między artystami a publicznością.
-                        </p>
-                    </div>
-
-                    <div class="group cursor-default fade-up">
-                        <span class="text-xs text-gray-400 block mb-4 border-b border-gray-200 pb-2 w-12 group-hover:w-full transition-all duration-700">04</span>
-                        <h3 class="text-2xl font-light mb-3">Edukacja</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">
-                            Prowadzimy programy edukacyjne i warsztaty rozwijające wrażliwość kulturalną i artystyczną uczestników.
-                        </p>
-                    </div>
-
-                    <div class="group cursor-default fade-up">
-                        <span class="text-xs text-gray-400 block mb-4 border-b border-gray-200 pb-2 w-12 group-hover:w-full transition-all duration-700">05</span>
-                        <h3 class="text-2xl font-light mb-3">Ochrona Dziedzictwa</h3>
-                        <p class="text-sm text-gray-500 font-light leading-relaxed">
-                            Dbamy o zachowanie i popularyzację polskiego dziedzictwa kulturowego oraz promocję Polski na arenie międzynarodowej.
+            <div class="absolute inset-0 grid grid-cols-1 lg:grid-cols-2 pointer-events-none">
+                <div class="bg-white/0 lg:border-r border-white/20"></div>
+                <div class="flex flex-col justify-end p-6 lg:p-12">
+                    <div class="bg-white p-6 lg:p-12 max-w-lg backdrop-blur-sm pointer-events-auto border border-black">
+                        <h1 class="text-4xl lg:text-6xl font-light leading-none mb-6 uppercase">
+                            Wspieranie<br>Kultury
+                        </h1>
+                        <p class="text-sm font-light leading-relaxed text-justify text-gray-600">
+                            FUNDACJA ARTIn.<br>
+                            BUDOWANIE POMOSTÓW MIĘDZYKULTUROWYCH POPRZEZ MUZYKĘ, SZTUKĘ I EDUKACJĘ W POLSCE I NA ŚWIECIE.
                         </p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="archiwum" class="px-6 py-24 lg:px-10 lg:py-32 border-t border-gray-100">
-            <div class="max-w-screen-2xl mx-auto">
-                <span class="text-xs uppercase tracking-[0.2em] opacity-40 block mb-12 fade-up">Archiwum Projektów</span>
-
-                <div class="group border-t border-black/10 hover:border-black transition-colors duration-500 py-12 fade-up">
-                    <div class="grid lg:grid-cols-12 gap-8">
-                        <div class="lg:col-span-4">
-                            <h3 class="text-3xl lg:text-4xl font-art-thin group-hover:translate-x-2 transition-transform duration-500">Paddymania – Paderewski Festival</h3>
-                            <p class="mt-2 text-xs uppercase tracking-widest text-gray-400">Morges, Szwajcaria</p>
-                        </div>
-                        <div class="lg:col-span-5 text-sm font-light text-gray-600 leading-relaxed flex items-center">
-                            <p>Organizacja Festiwalu w Morges.</p>
-                        </div>
-                        <div class="lg:col-span-3 flex flex-col justify-center space-y-2">
-                            <span class="text-xs font-bold uppercase tracking-widest opacity-100">Partnerzy</span>
-                            <p class="text-xs font-light text-gray-500">Swiss Haven</p>
-                            <p class="text-xs font-light text-gray-500">Associacion Autrement</p>
-                        </div>
-                    </div>
+        <section id="misja" class="relative border-b border-black">
+            <div class="flex flex-col lg:flex-row">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 bg-white lg:h-screen lg:sticky lg:top-0 z-10 flex flex-col justify-between">
+                    <span class="text-xs uppercase tracking-[0.2em]">01</span>
+                    <h2 class="text-3xl lg:text-4xl uppercase font-light break-words mt-4 lg:mt-0">Misja<br>Fundacji</h2>
                 </div>
 
-                <div class="group border-t border-b border-black/10 hover:border-black transition-colors duration-500 py-12 fade-up">
-                    <div class="grid lg:grid-cols-12 gap-8">
-                        <div class="lg:col-span-4">
-                            <h3 class="text-3xl lg:text-4xl font-art-thin group-hover:translate-x-2 transition-transform duration-500">Koncert na rzecz powodzian</h3>
-                            <p class="mt-2 text-xs uppercase tracking-widest text-gray-400">Solidaritätskonzert</p>
-                        </div>
-                        <div class="lg:col-span-5 text-sm font-light text-gray-600 leading-relaxed">
-                            <p class="mb-6">Koncert charytatywny w Szwajcarii. Zebrano 6 400 CHF dla mieszkańców gminy Wleń.</p>
-                            
-                            <div class="grid grid-cols-2 gap-y-1 gap-x-4 text-xs text-black/80">
-                                <div>Bartłomiej Nizoł</div>
-                                <div>Tomasz Domański</div>
-                                <div>Paweł Mazurkiewicz</div>
-                                <div>Lidia Vodyk</div>
-                                <div>Maciej Burdzy</div>
-                                <div>Wojciech Chmielewski</div>
-                                <div>Dominik Dołęga</div>
-                                <div>Aleksandra Jopek</div>
-                                <div>Anna Środecka</div>
-                                <div>Paulina Tomczuk</div>
+                <div class="w-full lg:w-3/4 bg-[#fcfcfc]">
+                    <div class="p-6 lg:p-24 min-h-[80vh] flex items-center">
+                        <p class="text-2xl lg:text-5xl font-light leading-tight indent-12 lg:indent-24 text-justify-flush">
+                            Misją Fundacji ARTIn jest wspieranie i promowanie kultury w jej różnorodnych odcieniach w Polsce i na świecie. Poprzez spotkania, relacje i edukację ARTIn chce budować pomosty międzykulturowe oraz kreować społeczeństwo otwarte, społecznie zaangażowane i kreatywne.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="codzialamy" class="relative border-b border-black">
+            <div class="flex flex-col lg:flex-row">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 bg-white lg:h-screen lg:sticky lg:top-0 z-10 flex flex-col justify-between">
+                    <span class="text-xs uppercase tracking-[0.2em]">02</span>
+                    <h2 class="text-3xl lg:text-4xl uppercase font-light mt-4 lg:mt-0">Działania</h2>
+                </div>
+
+                <div class="w-full lg:w-3/4">
+                    <div class="group border-b border-black hover-invert cursor-default transition-colors duration-300">
+                        <div class="p-6 lg:p-12 grid lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-4 text-sm uppercase tracking-widest opacity-50">Koncerty</div>
+                            <div class="lg:col-span-8 text-xl font-light leading-relaxed">
+                                Organizujemy koncerty i wydarzenia muzyczne promujące polskich kompozytorów i wykonawców zarówno w kraju jak i za granicą.
                             </div>
                         </div>
-                        <div class="lg:col-span-3 flex items-end lg:justify-end">
-                             <span class="inline-block px-3 py-1 border border-black text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors">Zobacz szczegóły</span>
+                    </div>
+                    <div class="group border-b border-black hover-invert cursor-default transition-colors duration-300">
+                        <div class="p-6 lg:p-12 grid lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-4 text-sm uppercase tracking-widest opacity-50">Festiwale</div>
+                            <div class="lg:col-span-8 text-xl font-light leading-relaxed">
+                                Wspieramy i organizujemy festiwale, które łączą artystów, publiczność i kulturę w wyjątkowe doświadczenia.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group border-b border-black hover-invert cursor-default transition-colors duration-300">
+                        <div class="p-6 lg:p-12 grid lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-4 text-sm uppercase tracking-widest opacity-50">Wystawy</div>
+                            <div class="lg:col-span-8 text-xl font-light leading-relaxed">
+                                Organizujemy wystawy sztuki współczesnej i tradycyjnej, tworząc przestrzenie dialogu między artystami a publicznością.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group border-b border-black hover-invert cursor-default transition-colors duration-300">
+                        <div class="p-6 lg:p-12 grid lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-4 text-sm uppercase tracking-widest opacity-50">Edukacja</div>
+                            <div class="lg:col-span-8 text-xl font-light leading-relaxed">
+                                Prowadzimy programy edukacyjne i warsztaty rozwijające wrażliwość kulturalną i artystyczną uczestników.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group hover-invert cursor-default transition-colors duration-300">
+                        <div class="p-6 lg:p-12 grid lg:grid-cols-12 gap-6">
+                            <div class="lg:col-span-4 text-sm uppercase tracking-widest opacity-50">Ochrona Dziedzictwa</div>
+                            <div class="lg:col-span-8 text-xl font-light leading-relaxed">
+                                Dbamy o zachowanie i popularyzację polskiego dziedzictwa kulturowego oraz promocję Polski na arenie międzynarodowej.
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="onas" class="bg-[#f4f4f4] px-6 py-24 lg:px-10 lg:py-32">
-            <div class="max-w-screen-2xl mx-auto">
-                <div class="grid lg:grid-cols-2 gap-16 lg:gap-32">
+        <section id="archiwum" class="relative border-b border-black">
+            <div class="flex flex-col lg:flex-row">
+                <div class="w-full lg:w-1/4 border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-8 bg-white lg:h-screen lg:sticky lg:top-0 z-10 flex flex-col justify-between">
+                    <span class="text-xs uppercase tracking-[0.2em]">03</span>
+                    <h2 class="text-3xl lg:text-4xl uppercase font-light mt-4 lg:mt-0">Archiwum<br>Projektów</h2>
+                </div>
+
+                <div class="w-full lg:w-3/4">
                     
-                    <div class="fade-up">
-                        <h3 class="text-2xl font-normal mb-6">Barbara Maciąg</h3>
-                        <p class="text-sm font-light leading-relaxed text-gray-600 text-justify">
-                            Współzałożycielka Fundacji ARTIn, zaangażowana w promocję polskiej kultury i sztuki zarówno w kraju jak i poza jego granicami.
-                        </p>
-                    </div>
-
-                    <div class="fade-up">
-                        <h3 class="text-2xl font-normal mb-6">Marzena Mikosz</h3>
-                        <p class="text-xs font-bold uppercase tracking-widest mb-4 opacity-70">Producentka, event manager</p>
-                        <div class="space-y-4 text-sm font-light leading-relaxed text-gray-600 text-justify">
-                            <p>Absolwentka archeologii i zarządzania marketingowego. Od ponad 20 lat zajmuje się promocją polskiej kultury. Jako rzecznik prasowy festiwalu Pieśń Naszych Korzeni i Baltic Opera Festival współpracowała z BBC Radio 3, MDR Klassik, Limelight Magazine.</p>
-                            <p>Nadzorowała pracę dużych zespołów i na stałe współpracuje z portalami Legalna Kultura i Polish Opera Now. Jej projekty zdobywały nagrody International Classical Music Awards oraz Gramophone Award.</p>
+                    <div class="border-b border-black p-6 lg:p-12 hover:bg-gray-50 transition-colors">
+                        <div class="flex flex-col gap-8">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-3xl lg:text-5xl font-light uppercase">Organizacja Festiwalu w Morges</h3>
+                                <span class="text-xs border border-black px-2 py-1 uppercase tracking-widest hidden lg:block">Szwajcaria</span>
+                            </div>
+                            
+                            <div class="grid lg:grid-cols-2 gap-8 mt-4">
+                                <div class="text-sm font-light leading-relaxed text-gray-600">
+                                    Organizacja Festiwalu w Morges. Paddymania – Paderewski Festival.
+                                </div>
+                                <div>
+                                    <p class="text-xs uppercase tracking-widest mb-2 opacity-50">Partnerzy</p>
+                                    <ul class="text-sm font-light space-y-1">
+                                        <li>Swiss Haven</li>
+                                        <li>Associacion Autrement</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <div class="p-6 lg:p-12 hover:bg-gray-50 transition-colors">
+                        <div class="flex flex-col gap-8">
+                            <div class="flex justify-between items-start">
+                                <h3 class="text-3xl lg:text-5xl font-light uppercase">Koncert na rzecz powodzian</h3>
+                                <span class="text-xs border border-black px-2 py-1 uppercase tracking-widest hidden lg:block">Solidaritätskonzert</span>
+                            </div>
+
+                            <div class="grid lg:grid-cols-12 gap-8 mt-4">
+                                <div class="lg:col-span-5 text-sm font-light leading-relaxed text-gray-600">
+                                    Koncert charytatywny w Szwajcarii. Zebrana suma 6 400 CHF przekazana mieszkańcom gminy Wleń.
+                                </div>
+                                <div class="lg:col-span-7">
+                                    <p class="text-xs uppercase tracking-widest mb-3 opacity-50">Artyści</p>
+                                    <div class="text-lg lg:text-xl font-light leading-snug uppercase">
+                                        Bartłomiej Nizoł / Paweł Mazurkiewicz / Maciej Burdzy / Dominik Dołęga / Anna Środecka / Tomasz Domański / Lidia Vodyk / Wojciech Chmielewski / Aleksandra Jopek / Paulina Tomczuk
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <section id="wesprzyj" class="px-6 py-24 lg:px-10 lg:py-32 max-w-screen-2xl mx-auto">
-            <div class="grid lg:grid-cols-12 gap-12">
-                <div class="lg:col-span-4 fade-up">
-                    <h2 class="text-4xl lg:text-5xl font-art-thin tracking-tight">Wsparcie</h2>
-                </div>
-                <div class="lg:col-span-8 fade-up">
-                    <p class="text-lg font-light mb-12 max-w-xl">
-                        Każda wpłata pozwala nam realizować misję promowania polskiej kultury.
+        <section id="onas" class="relative border-b border-black">
+            <div class="grid lg:grid-cols-2">
+                <div class="border-b lg:border-b-0 lg:border-r border-black p-6 lg:p-16 hover-invert transition-all duration-500">
+                    <h3 class="text-2xl uppercase mb-6 font-light">Barbara Maciąg</h3>
+                    <p class="text-sm font-light leading-relaxed text-justify">
+                        Współzałożycielka Fundacji ARTIn, zaangażowana w promocję polskiej kultury i sztuki zarówno w kraju jak i poza jego granicami.
                     </p>
-                    
-                    <div class="border-t border-black">
-                        <div class="grid grid-cols-1 md:grid-cols-2 border-b border-gray-200 py-4">
-                            <span class="text-xs uppercase tracking-widest opacity-50">Nazwa</span>
-                            <span class="text-sm">ArtIn Foundation / Fundacja ArtIn</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 border-b border-gray-200 py-4">
-                            <span class="text-xs uppercase tracking-widest opacity-50">Adres</span>
-                            <span class="text-sm">Grzybowska 2/31, 00-131 Warszawa</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 border-b border-gray-200 py-4">
-                            <span class="text-xs uppercase tracking-widest opacity-50">Konto Bankowe</span>
-                            <span class="text-sm font-mono">79 2530 0008 2090 1088 0820 0001</span>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 border-b border-black py-4">
-                            <span class="text-xs uppercase tracking-widest opacity-50">Dane rejestrowe</span>
-                            <span class="text-sm">NIP: 5253057607 &nbsp;/&nbsp; KRS: 0001189360</span>
-                        </div>
+                </div>
+                <div class="p-6 lg:p-16 hover-invert transition-all duration-500">
+                    <h3 class="text-2xl uppercase mb-6 font-light">Marzena Mikosz</h3>
+                    <p class="text-xs uppercase tracking-widest mb-4 opacity-60">Producentka / Event Manager</p>
+                    <div class="text-sm font-light leading-relaxed space-y-4 text-justify">
+                        <p>Absolwentka archeologii i zarządzania marketingowego. Od ponad 20 lat zajmuje się promocją polskiej kultury. Jako rzecznik prasowy festiwalu Pieśń Naszych Korzeni i Baltic Opera Festival współpracowała z BBC Radio 3, MDR Klassik, Limelight Magazine.</p>
+                        <p>Nadzorowała pracę zespołów składających się od kilku do kilkudziesięciu osób. Projekty, które koordynowała zdobywały liczne nagrody: International Classical Music Awards, Gramophone Award.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="kontakt" class="bg-[#111] text-white px-6 py-24 lg:px-10 lg:py-32">
-            <div class="max-w-screen-2xl mx-auto grid lg:grid-cols-2 gap-24">
+        <section id="wesprzyj" class="bg-black text-white py-24 px-6 lg:px-12">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-4xl lg:text-6xl font-light uppercase mb-16 text-center">Wsparcie</h2>
                 
-                <div class="fade-up">
-                    <h2 class="text-3xl font-art-thin mb-12">Kontakt</h2>
-                    <form class="space-y-8">
-                        <div class="relative group">
-                            <input type="text" required class="w-full bg-transparent border-b border-gray-700 py-4 text-sm focus:outline-none focus:border-white transition-colors peer placeholder-transparent" placeholder="Imię">
-                            <label class="absolute left-0 top-4 text-xs text-gray-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm pointer-events-none">IMIĘ I NAZWISKO</label>
-                        </div>
-                        <div class="relative group">
-                            <input type="email" required class="w-full bg-transparent border-b border-gray-700 py-4 text-sm focus:outline-none focus:border-white transition-colors peer placeholder-transparent" placeholder="Email">
-                            <label class="absolute left-0 top-4 text-xs text-gray-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm pointer-events-none">EMAIL</label>
-                        </div>
-                        <div class="relative group">
-                            <textarea rows="3" required class="w-full bg-transparent border-b border-gray-700 py-4 text-sm focus:outline-none focus:border-white transition-colors peer placeholder-transparent resize-none" placeholder="Wiadomość"></textarea>
-                            <label class="absolute left-0 top-4 text-xs text-gray-500 transition-all peer-focus:-top-4 peer-focus:text-xs peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm pointer-events-none">WIADOMOŚĆ</label>
-                        </div>
-                        <button type="submit" class="text-xs tracking-[0.3em] uppercase py-4 border-b border-transparent hover:border-white transition-all">Wyślij wiadomość</button>
-                    </form>
-                </div>
-
-                <div class="flex flex-col justify-between fade-up text-gray-400 font-light text-sm">
-                    <div class="space-y-8">
-                        <div>
-                            <p class="text-xs uppercase tracking-widest mb-2 text-gray-600">Email</p>
-                            <a href="mailto:marzena@mikosz.net" class="hover:text-white transition-colors">marzena@mikosz.net</a><br>
-                            <a href="mailto:ArtInFoundation@gmail.com" class="hover:text-white transition-colors">ArtInFoundation@gmail.com</a>
-                        </div>
-                        <div>
-                            <p class="text-xs uppercase tracking-widest mb-2 text-gray-600">Developer</p>
-                            <p>Aga Maciag</p>
-                        </div>
+                <div class="border-t border-white/30">
+                    <div class="grid grid-cols-1 md:grid-cols-2 py-6 border-b border-white/30">
+                        <span class="text-xs uppercase tracking-widest opacity-50">Nazwa</span>
+                        <span class="text-lg font-light">ArtIn Foundation / Fundacja ArtIn</span>
                     </div>
-                    <div class="mt-16 lg:mt-0">
-                        <p>&copy; 2025 Fundacja ARTIn. All rights reserved.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 py-6 border-b border-white/30">
+                        <span class="text-xs uppercase tracking-widest opacity-50">Adres</span>
+                        <span class="text-lg font-light">Grzybowska 2/31, 00-131 Warszawa</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 py-6 border-b border-white/30">
+                        <span class="text-xs uppercase tracking-widest opacity-50">Konto</span>
+                        <span class="text-lg font-light font-mono">79 2530 0008 2090 1088 0820 0001</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 py-6 border-b border-white/30">
+                        <span class="text-xs uppercase tracking-widest opacity-50">Rejestr</span>
+                        <span class="text-lg font-light">NIP: 5253057607 <span class="mx-2">/</span> KRS: 0001189360</span>
                     </div>
                 </div>
             </div>
         </section>
+
+        <footer id="kontakt" class="py-12 px-6 lg:px-12 flex flex-col lg:flex-row justify-between items-end text-xs uppercase tracking-widest">
+            <div class="mb-6 lg:mb-0">
+                <p class="mb-2 opacity-50">Kontakt</p>
+                <a href="mailto:ArtInFoundation@gmail.com" class="block hover:underline">ArtInFoundation@gmail.com</a>
+                <a href="mailto:marzena@mikosz.net" class="block hover:underline">marzena@mikosz.net</a>
+            </div>
+            <div class="text-right">
+                <p>&copy; 2025 Fundacja ARTIn</p>
+            </div>
+        </footer>
+
     </main>
 
     <script>
-        // HERO SLIDER
-        const images = document.querySelectorAll('.hero-image');
-        let currentIdx = 0;
+        // Simple Slideshow
+        const images = document.querySelectorAll('.hero-img');
+        let current = 0;
         setInterval(() => {
-            images[currentIdx].classList.remove('active');
-            currentIdx = (currentIdx + 1) % images.length;
-            images[currentIdx].classList.add('active');
-        }, 5000); // Slower, more elegant transition time
+            images[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+        }, 4000);
 
-        // FADE UP OBSERVER
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-        // MOBILE MENU
-        const toggle = document.getElementById('menu-toggle');
+        // Mobile Menu Logic
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-menu');
         const menu = document.getElementById('mobile-menu');
-        const bars = [document.getElementById('bar1'), document.getElementById('bar2')];
-        let isOpen = false;
+        const links = document.querySelectorAll('.mobile-link');
 
-        toggle.addEventListener('click', () => {
-            isOpen = !isOpen;
-            if(isOpen) {
-                menu.classList.remove('invisible', 'opacity-0');
-                bars[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                bars[1].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-            } else {
-                menu.classList.add('invisible', 'opacity-0');
-                bars[0].style.transform = 'none';
-                bars[1].style.transform = 'none';
-            }
-        });
+        function toggleMenu() {
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
 
-        document.querySelectorAll('.mobile-link').forEach(link => {
-            link.addEventListener('click', () => {
-                isOpen = false;
-                menu.classList.add('invisible', 'opacity-0');
-                bars[0].style.transform = 'none';
-                bars[1].style.transform = 'none';
-            });
-        });
+        menuBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        links.forEach(link => link.addEventListener('click', toggleMenu));
     </script>
 </body>
 </html>
